@@ -1,3 +1,11 @@
+export const VOTE_TYPES = ['green', 'red', 'orange'];
+
+export const findVoteTypeForDate = (dateStr, votesObj = {}) =>
+  VOTE_TYPES.find((voteType) => {
+    const dates = votesObj?.[voteType];
+    return Array.isArray(dates) && dates.includes(dateStr);
+  }) || null;
+
 // Merge de las selecciones de UN usuario aplicando solo los cambios de la sesión
 // actual sobre el estado del backend (para no pisar votos hechos en otra pestaña
 // o por el propio usuario en otro momento).
@@ -11,18 +19,11 @@
 export const mergeUserSelections = (backendSelectedDays, localVotes, localTimeSlots = {}, modifiedDates = []) => {
   const backend = backendSelectedDays || {};
   const finalSelectedDays = {
-    green: [...(backend.green || [])],
-    red: [...(backend.red || [])],
-    orange: [...(backend.orange || [])]
+    green: Array.isArray(backend.green) ? [...backend.green] : [],
+    red: Array.isArray(backend.red) ? [...backend.red] : [],
+    orange: Array.isArray(backend.orange) ? [...backend.orange] : []
   };
   const finalTimeSlots = { ...(backend.timeSlots || {}) };
-
-  const findVoteType = (dateStr, votesObj) => {
-    for (const [voteType, dates] of Object.entries(votesObj)) {
-      if (dates.includes(dateStr)) return voteType;
-    }
-    return null;
-  };
 
   const dates = modifiedDates instanceof Set ? Array.from(modifiedDates) : (modifiedDates || []);
 
@@ -32,7 +33,7 @@ export const mergeUserSelections = (backendSelectedDays, localVotes, localTimeSl
       finalSelectedDays[voteType] = finalSelectedDays[voteType].filter((d) => d !== dateStr);
     });
 
-    const currentVoteType = findVoteType(dateStr, localVotes);
+    const currentVoteType = findVoteTypeForDate(dateStr, localVotes);
     if (currentVoteType) {
       finalSelectedDays[currentVoteType].push(dateStr);
     }

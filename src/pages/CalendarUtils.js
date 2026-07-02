@@ -1,3 +1,5 @@
+import { VOTE_TYPES } from '../utils/selections';
+
 // Franjas horarias del día, en orden. La etiqueta visible se resuelve con i18n: t('slot_' + key)
 export const TIME_SLOTS = ['morning', 'midMorning', 'midday', 'afternoon', 'night', 'dawn'];
 
@@ -33,7 +35,9 @@ export const generateEvents = (currentUserDays, handleEventClick, allUsers = [],
     
     // Add current user's events
     if (currentUserDays) {
-      Object.entries(currentUserDays).forEach(([key, dates]) => {
+      VOTE_TYPES.forEach((key) => {
+        const dates = currentUserDays[key];
+        if (!Array.isArray(dates)) return;
         dates.forEach((date) => {
           newEvents.push({
             start: new Date(date),
@@ -58,7 +62,9 @@ export const generateEvents = (currentUserDays, handleEventClick, allUsers = [],
     // Add other users' events
     allUsers.forEach((user) => {
       if (user.userId !== currentUserName && user.selectedDays) {
-        Object.entries(user.selectedDays).forEach(([key, dates]) => {
+        VOTE_TYPES.forEach((key) => {
+          const dates = user.selectedDays[key];
+          if (!Array.isArray(dates)) return;
           dates.forEach((date) => {
             newEvents.push({
               start: new Date(date),

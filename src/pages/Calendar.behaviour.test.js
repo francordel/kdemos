@@ -37,6 +37,28 @@ beforeEach(() => {
 });
 
 describe('Calendar — flujo de franjas horarias (BDD)', () => {
+  it('renderiza usuarios del backend con franjas horarias sin pantalla en blanco', async () => {
+    const visibleDate = new Date();
+    visibleDate.setDate(15);
+    const dateStr = visibleDate.toDateString();
+
+    mockFetch.mockResolvedValue([
+      {
+        userId: 'Ana',
+        selectedDays: { green: [dateStr], red: [], orange: [], timeSlots: { [dateStr]: ['morning'] } }
+      },
+      {
+        userId: 'Ben',
+        selectedDays: { green: [dateStr], red: [], orange: [], timeSlots: { [dateStr]: ['night'] } }
+      }
+    ]);
+
+    renderCalendar();
+
+    expect(await screen.findByText(/Ben: ✓/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Finalizar' })).toBeInTheDocument();
+  });
+
   it('marca un día como disponible, elige una franja y la persiste al finalizar', async () => {
     renderCalendar();
 

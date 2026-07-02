@@ -1,6 +1,18 @@
-import { mergeUserSelections } from './selections';
+import { findVoteTypeForDate, mergeUserSelections } from './selections';
 
 describe('mergeUserSelections', () => {
+  it('busca votos solo en green/red/orange e ignora timeSlots', () => {
+    const selections = {
+      green: [],
+      red: [],
+      orange: ['D1'],
+      timeSlots: { D1: ['morning'] }
+    };
+
+    expect(findVoteTypeForDate('D1', selections)).toBe('orange');
+    expect(findVoteTypeForDate('D2', selections)).toBeNull();
+  });
+
   it('usuario nuevo (sin backend): guarda el voto y sus franjas', () => {
     const res = mergeUserSelections(
       undefined,

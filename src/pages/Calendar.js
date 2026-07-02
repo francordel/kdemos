@@ -44,7 +44,7 @@ import "./Calendar.css";
 import { dayPropGetter, TIME_SLOTS } from './CalendarUtils';
 import Recommendation from '../components/Recommendation';
 import { saveUserSelections, getUserFromCalendar, fetchCalendarSelections } from '../services';
-import { mergeUserSelections } from '../utils/selections';
+import { findVoteTypeForDate, mergeUserSelections } from '../utils/selections';
 
 const locales = { es, en: enUS };
 
@@ -122,7 +122,7 @@ function Calendar() {
 
   // Voto local (esta sesión) de una fecha, si lo hay
   const getLocalVoteType = useCallback(
-    (dateStr) => ['green', 'red', 'orange'].find((k) => selectedDays[k].includes(dateStr)) || null,
+    (dateStr) => findVoteTypeForDate(dateStr, selectedDays),
     [selectedDays]
   );
 
@@ -133,9 +133,7 @@ function Calendar() {
     const backendUser = allUsers.find(
       (u) => u.userId && userName && u.userId.trim() === userName.trim()
     );
-    const backendVote = backendUser?.selectedDays
-      ? ['green', 'red', 'orange'].find((k) => (backendUser.selectedDays[k] || []).includes(dateStr)) || null
-      : null;
+    const backendVote = findVoteTypeForDate(dateStr, backendUser?.selectedDays);
     const backendSlots = backendUser?.selectedDays?.timeSlots?.[dateStr] || [];
     const wasModified = modifiedDates.has(dateStr);
 
@@ -536,18 +534,16 @@ function Calendar() {
                   const dateStr = date.toDateString();
                   
                   // Get current user's vote - prioritize local changes over backend
-                  const currentUserLocalVote = Object.keys(selectedDays).find(key => 
-                    selectedDays[key].includes(dateStr)
-                  );
+                  const currentUserLocalVote = findVoteTypeForDate(dateStr, selectedDays);
                   
                   const currentUserBackendData = allUsers.find(user => 
                     user.userId && userName && user.userId.trim() === userName.trim()
                   );
                   
-                  const currentUserBackendVote = currentUserBackendData?.selectedDays ? 
-                    Object.keys(currentUserBackendData.selectedDays).find(key => 
-                      currentUserBackendData.selectedDays[key].includes(dateStr)
-                    ) : null;
+                  const currentUserBackendVote = findVoteTypeForDate(
+                    dateStr,
+                    currentUserBackendData?.selectedDays
+                  );
                   
                   // If this date was modified in current session, use local vote
                   // Otherwise, fall back to backend vote
@@ -566,9 +562,7 @@ function Calendar() {
                       return !isCurrentUser;
                     })
                     .map(user => {
-                      const userVote = user.selectedDays ? Object.keys(user.selectedDays).find(key => 
-                        user.selectedDays[key].includes(dateStr)
-                      ) : null;
+                      const userVote = findVoteTypeForDate(dateStr, user.selectedDays);
                       return userVote ? { userId: user.userId, vote: userVote } : null;
                     })
                     .filter(Boolean);
@@ -918,9 +912,7 @@ function Calendar() {
                   return !isCurrentUser;
                 })
                 .map(user => {
-                  const userVote = user.selectedDays ? Object.keys(user.selectedDays).find(key => 
-                    user.selectedDays[key].includes(dateStr)
-                  ) : null;
+                  const userVote = findVoteTypeForDate(dateStr, user.selectedDays);
                   return userVote ? { userId: user.userId, vote: userVote } : null;
                 })
                 .filter(Boolean);
