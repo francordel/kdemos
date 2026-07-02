@@ -44,13 +44,27 @@ export async function onRequest({ request, env }) {
       // Parseamos los usuarios desde la representación de Firestore
       const parsedUsers = users.map(user => {
         const fields = user.mapValue.fields;
+        const selectedDaysFields = fields.selectedDays.mapValue.fields;
+
+        const selectedDays = {
+          green: (selectedDaysFields.green?.arrayValue?.values || []).map(v => v.stringValue),
+          red: (selectedDaysFields.red?.arrayValue?.values || []).map(v => v.stringValue),
+          orange: (selectedDaysFields.orange?.arrayValue?.values || []).map(v => v.stringValue)
+        };
+
+        // Franjas horarias (opcional): mapa fecha -> array de franjas
+        const slotFields = selectedDaysFields.timeSlots?.mapValue?.fields;
+        if (slotFields) {
+          const timeSlots = {};
+          for (const [dateStr, val] of Object.entries(slotFields)) {
+            timeSlots[dateStr] = (val.arrayValue?.values || []).map(v => v.stringValue);
+          }
+          selectedDays.timeSlots = timeSlots;
+        }
+
         return {
           userId: fields.userId.stringValue,
-          selectedDays: {
-            green: (fields.selectedDays.mapValue.fields.green?.arrayValue?.values || []).map(v => v.stringValue),
-            red: (fields.selectedDays.mapValue.fields.red?.arrayValue?.values || []).map(v => v.stringValue),
-            orange: (fields.selectedDays.mapValue.fields.orange?.arrayValue?.values || []).map(v => v.stringValue)
-          }
+          selectedDays
         };
       });
   

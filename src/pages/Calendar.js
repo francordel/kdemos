@@ -41,9 +41,10 @@ import {
 import "./Calendar.css";
 
 // Importamos las funciones de utilidad
-import { dayPropGetter } from './CalendarUtils';
+import { dayPropGetter, TIME_SLOTS } from './CalendarUtils';
 import Recommendation from '../components/Recommendation';
 import { saveUserSelections, getUserFromCalendar, fetchCalendarSelections } from '../services';
+import { mergeUserSelections } from '../utils/selections';
 
 const locales = { es, en: enUS };
 
@@ -63,9 +64,12 @@ function Calendar() {
   const queryParams = new URLSearchParams(location.search);
   const userName = queryParams.get('name');
   const [selectedDays, setSelectedDays] = useState({ green: [], red: [], orange: [] });
+  const [timeSlots, setTimeSlots] = useState({}); // { [dateStr]: [slotKeys] } — franjas por día (opcional)
   const [modifiedDates, setModifiedDates] = useState(new Set()); // Track dates modified in this session
   const [popupDate, setPopupDate] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [dialogVoteType, setDialogVoteType] = useState(null); // voto elegido dentro del diálogo abierto
+  const [dialogSlots, setDialogSlots] = useState([]); // franjas elegidas dentro del diálogo abierto
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -116,11 +120,35 @@ function Calendar() {
 
   // Calendar will automatically re-render when selectedDays or allUsers change
 
+  // Voto local (esta sesión) de una fecha, si lo hay
+  const getLocalVoteType = useCallback(
+    (dateStr) => ['green', 'red', 'orange'].find((k) => selectedDays[k].includes(dateStr)) || null,
+    [selectedDays]
+  );
+
+  // Abre el diálogo de un día precargando su voto y sus franjas (local, con respaldo del backend)
+  const openDialogForDate = useCallback((date) => {
+    const dateStr = date.toDateString();
+    const localVote = getLocalVoteType(dateStr);
+    const backendUser = allUsers.find(
+      (u) => u.userId && userName && u.userId.trim() === userName.trim()
+    );
+    const backendVote = backendUser?.selectedDays
+      ? ['green', 'red', 'orange'].find((k) => (backendUser.selectedDays[k] || []).includes(dateStr)) || null
+      : null;
+    const backendSlots = backendUser?.selectedDays?.timeSlots?.[dateStr] || [];
+    const wasModified = modifiedDates.has(dateStr);
+
+    setDialogVoteType(wasModified ? localVote : (localVote || backendVote));
+    setDialogSlots(timeSlots[dateStr] || (wasModified ? [] : backendSlots));
+    setPopupDate(date);
+    setOpenDialog(true);
+  }, [getLocalVoteType, allUsers, userName, timeSlots, modifiedDates]);
+
   const handleSelectSlot = ({ start }) => {
     const today = new Date().setHours(0, 0, 0, 0);
     if (start >= today) {
-      setPopupDate(start);
-      setOpenDialog(true);
+      openDialogForDate(start);
     }
   };
 
@@ -128,96 +156,89 @@ function Calendar() {
   const handleDateClick = useCallback((date) => {
     const today = new Date().setHours(0, 0, 0, 0);
     if (date >= today) {
-      setPopupDate(date);
-      setOpenDialog(true);
+      openDialogForDate(date);
     }
-  }, []);
+  }, [openDialogForDate]);
 
   const handleDialogClose = () => {
     setPopupDate(null);
     setOpenDialog(false);
+    setDialogVoteType(null);
+    setDialogSlots([]);
   };
 
-  const handleDaySelection = (type) => {
+  // Aplica el voto (y sus franjas) de la fecha abierta al estado local y cierra el diálogo
+  const commitSelection = (type, slots) => {
     const dateStr = popupDate.toDateString();
-    
-    // Track that this date has been modified in this session
-    setModifiedDates(prev => new Set(prev).add(dateStr));
-    
-    setSelectedDays((prev) => {
-      const updated = { ...prev };
 
+    // Track that this date has been modified in this session
+    setModifiedDates((prev) => new Set(prev).add(dateStr));
+
+    setSelectedDays((prev) => {
+      const updated = { green: [...prev.green], red: [...prev.red], orange: [...prev.orange] };
       // Eliminar la fecha de todos los estados previos
       Object.keys(updated).forEach((key) => {
         updated[key] = updated[key].filter((day) => day !== dateStr);
       });
-
       // Only add to the selected type if it's not 'clear'
       if (type !== 'clear') {
         updated[type].push(dateStr);
       }
-
       return updated;
     });
+
+    setTimeSlots((prev) => {
+      const next = { ...prev };
+      // Las franjas solo tienen sentido en días disponibles/quizás
+      if ((type === 'green' || type === 'orange') && slots && slots.length > 0) {
+        next[dateStr] = slots;
+      } else {
+        delete next[dateStr];
+      }
+      return next;
+    });
+
     handleDialogClose();
   };
 
+  // Elegir disponibilidad en el diálogo: rojo y voto en blanco cierran ya;
+  // disponible/quizás revelan las franjas y esperan a "Guardar".
+  const handlePickAvailability = (type) => {
+    if (type === 'red' || type === 'clear') {
+      commitSelection(type, []);
+    } else {
+      setDialogVoteType(type);
+    }
+  };
+
+  const toggleDialogSlot = (slot) => {
+    setDialogSlots((prev) => (prev.includes(slot) ? prev.filter((s) => s !== slot) : [...prev, slot]));
+  };
+
+  const handleSaveDaySelection = () => {
+    commitSelection(dialogVoteType, dialogSlots);
+  };
+
   const handleEventClick = (eventDate) => {
-    setPopupDate(eventDate);
-    setOpenDialog(true);
+    openDialogForDate(eventDate);
   };
 
   const handleFinish = async () => {
     try {
       setIsLoading(true);
       
-      // Get the latest backend data (in case someone else voted)
+      // Get the latest backend data (in case someone else voted) and merge only
+      // this session's changes on top of it.
       const existingUser = await getUserFromCalendar(calendarId, userName);
-      let backendVotes = { green: [], red: [], orange: [] };
-      
-      if (existingUser && existingUser.selectedDays) {
-        backendVotes = existingUser.selectedDays;
-      }
-      
-      // Start with current backend state
-      let finalSelectedDays = {
-        green: [...backendVotes.green],
-        red: [...backendVotes.red],
-        orange: [...backendVotes.orange]
-      };
-      
-      // Function to find which vote type a date has in a votes object
-      const findVoteType = (dateStr, votesObj) => {
-        for (const [voteType, dates] of Object.entries(votesObj)) {
-          if (dates.includes(dateStr)) {
-            return voteType;
-          }
-        }
-        return null;
-      };
-      
-      // Apply only the changes that were actually modified in this session
-      modifiedDates.forEach(dateStr => {
-        // Remove this date from all vote types first
-        Object.keys(finalSelectedDays).forEach(voteType => {
-          finalSelectedDays[voteType] = finalSelectedDays[voteType].filter(d => d !== dateStr);
-        });
-        
-        // Find where this date is in the current selectedDays
-        const currentVoteType = findVoteType(dateStr, selectedDays);
-        
-        // If the date has a vote in current state, add it
-        if (currentVoteType) {
-          finalSelectedDays[currentVoteType].push(dateStr);
-        }
-        // If currentVoteType is null, the date was removed (blank vote)
-      });
-      
-      await saveUserSelections(userName, calendarId, finalSelectedDays);
-      
-      // Update local state
-      setSelectedDays(finalSelectedDays);
-      
+      const payload = mergeUserSelections(existingUser?.selectedDays, selectedDays, timeSlots, modifiedDates);
+
+      await saveUserSelections(userName, calendarId, payload);
+
+      // Update local state (keep votes and time slots as separate state)
+      const { timeSlots: savedSlots, ...savedVotes } = payload;
+      setSelectedDays({ green: savedVotes.green, red: savedVotes.red, orange: savedVotes.orange });
+      setTimeSlots(savedSlots);
+
       // Clear the modified dates since we've now saved them
       setModifiedDates(new Set());
       
@@ -320,8 +341,10 @@ function Calendar() {
       const existingUser = await getUserFromCalendar(calendarId, tempUserName.trim());
       
       if (existingUser && existingUser.selectedDays) {
-        // User exists, load their existing data
-        setSelectedDays(existingUser.selectedDays);
+        // User exists, load their existing data (keep votes and time slots separate)
+        const { timeSlots: loadedSlots, green = [], red = [], orange = [] } = existingUser.selectedDays;
+        setSelectedDays({ green, red, orange });
+        setTimeSlots(loadedSlots || {});
         // Clear modified dates since we're starting fresh
         setModifiedDates(new Set());
       }
@@ -530,6 +553,11 @@ function Calendar() {
                   // Otherwise, fall back to backend vote
                   const dateHasBeenModified = modifiedDates.has(dateStr);
                   const currentUserVote = dateHasBeenModified ? currentUserLocalVote : (currentUserLocalVote || currentUserBackendVote);
+
+                  // Franjas del usuario para este día (local, con respaldo del backend)
+                  const currentUserSlots = dateHasBeenModified
+                    ? (timeSlots[dateStr] || [])
+                    : (timeSlots[dateStr] || currentUserBackendData?.selectedDays?.timeSlots?.[dateStr] || []);
                   
                   // Get other users' votes for this date (excluding current user)
                   const otherUsersVotes = allUsers
@@ -598,12 +626,27 @@ function Calendar() {
                               lineHeight: 1.2
                             }}
                           >
-                            {userName} ({t('you')}): {currentUserVote === 'green' ? '✓' : 
+                            {userName} ({t('you')}): {currentUserVote === 'green' ? '✓' :
                              currentUserVote === 'red' ? '✗' : '?'}
                           </Typography>
                         </Box>
                       )}
-                      
+
+                      {/* Current user time-slots indicator */}
+                      {currentUserVote && currentUserSlots.length > 0 && (
+                        <Typography
+                          sx={{
+                            fontSize: { xs: '7px', md: '9px' },
+                            color: 'text.secondary',
+                            fontWeight: 600,
+                            mb: 0.5,
+                            lineHeight: 1
+                          }}
+                        >
+                          🕐 {currentUserSlots.length}
+                        </Typography>
+                      )}
+
                       {/* Other users' votes */}
                       {otherUsersVotes.length > 0 && (
                         <Stack 
@@ -944,9 +987,9 @@ function Calendar() {
             })()}
             
             <Stack spacing={2}>
-              <Button 
-                onClick={() => handleDaySelection("green")} 
-                fullWidth 
+              <Button
+                onClick={() => handlePickAvailability("green")}
+                fullWidth
                 variant="contained"
                 startIcon={<CheckIcon />}
                 sx={{
@@ -955,6 +998,9 @@ function Calendar() {
                   borderRadius: 1.5,
                   fontWeight: 500,
                   textTransform: "none",
+                  opacity: dialogVoteType && dialogVoteType !== "green" ? 0.5 : 1,
+                  outline: dialogVoteType === "green" ? "3px solid rgba(40, 167, 69, 0.35)" : "none",
+                  outlineOffset: 2,
                   "&:hover": {
                     backgroundColor: "#218838",
                   },
@@ -962,10 +1008,10 @@ function Calendar() {
               >
                 {t('available')}
               </Button>
-              
-              <Button 
-                onClick={() => handleDaySelection("orange")} 
-                fullWidth 
+
+              <Button
+                onClick={() => handlePickAvailability("orange")}
+                fullWidth
                 variant="contained"
                 startIcon={<HelpIcon />}
                 sx={{
@@ -974,6 +1020,9 @@ function Calendar() {
                   borderRadius: 1.5,
                   fontWeight: 500,
                   textTransform: "none",
+                  opacity: dialogVoteType && dialogVoteType !== "orange" ? 0.5 : 1,
+                  outline: dialogVoteType === "orange" ? "3px solid rgba(255, 149, 0, 0.35)" : "none",
+                  outlineOffset: 2,
                   "&:hover": {
                     backgroundColor: "#E68900",
                   },
@@ -981,10 +1030,10 @@ function Calendar() {
               >
                 {t('maybe')}
               </Button>
-              
-              <Button 
-                onClick={() => handleDaySelection("red")} 
-                fullWidth 
+
+              <Button
+                onClick={() => handlePickAvailability("red")}
+                fullWidth
                 variant="contained"
                 startIcon={<CancelIcon />}
                 sx={{
@@ -993,6 +1042,7 @@ function Calendar() {
                   borderRadius: 1.5,
                   fontWeight: 500,
                   textTransform: "none",
+                  opacity: dialogVoteType ? 0.5 : 1,
                   "&:hover": {
                     backgroundColor: "#E3342F",
                   },
@@ -1001,9 +1051,9 @@ function Calendar() {
                 {t('notAvailable')}
               </Button>
 
-              <Button 
-                onClick={() => handleDaySelection("clear")} 
-                fullWidth 
+              <Button
+                onClick={() => handlePickAvailability("clear")}
+                fullWidth
                 variant="outlined"
                 startIcon={<RemoveIcon />}
                 sx={{
@@ -1013,6 +1063,7 @@ function Calendar() {
                   borderRadius: 1.5,
                   fontWeight: 500,
                   textTransform: "none",
+                  opacity: dialogVoteType ? 0.5 : 1,
                   "&:hover": {
                     borderColor: "#6D6D70",
                     backgroundColor: "rgba(142, 142, 147, 0.04)",
@@ -1022,12 +1073,48 @@ function Calendar() {
                 {t('removeVote')}
               </Button>
             </Stack>
+
+            {/* Time slots (only for available / maybe) */}
+            {(dialogVoteType === 'green' || dialogVoteType === 'orange') && (
+              <Box sx={{ mt: 3 }}>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  sx={{ mb: 1.5, color: isDark ? '#FFF' : '#1C1C1E' }}
+                >
+                  {t('timeSlotsTitle')}
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {TIME_SLOTS.map((slot) => {
+                    const selected = dialogSlots.includes(slot);
+                    return (
+                      <Chip
+                        key={slot}
+                        label={t('slot_' + slot)}
+                        onClick={() => toggleDialogSlot(slot)}
+                        variant={selected ? 'filled' : 'outlined'}
+                        sx={{
+                          cursor: 'pointer',
+                          backgroundColor: selected ? '#007AFF' : 'transparent',
+                          color: selected ? '#fff' : '#007AFF',
+                          borderColor: '#007AFF',
+                          fontWeight: 500,
+                          '&:hover': {
+                            backgroundColor: selected ? '#0056CC' : 'rgba(0, 122, 255, 0.08)',
+                          },
+                        }}
+                      />
+                    );
+                  })}
+                </Box>
+              </Box>
+            )}
           </DialogContent>
           
           <DialogActions sx={{ p: 3, pt: 1 }}>
-            <Button 
-              onClick={handleDialogClose} 
-              sx={{ 
+            <Button
+              onClick={handleDialogClose}
+              sx={{
                 color: "#8E8E93",
                 fontWeight: 500,
                 textTransform: "none",
@@ -1036,6 +1123,22 @@ function Calendar() {
             >
               {t('cancel')}
             </Button>
+            {(dialogVoteType === 'green' || dialogVoteType === 'orange') && (
+              <Button
+                onClick={handleSaveDaySelection}
+                variant="contained"
+                sx={{
+                  backgroundColor: "#007AFF",
+                  fontWeight: 500,
+                  textTransform: "none",
+                  borderRadius: 1.5,
+                  px: 3,
+                  "&:hover": { backgroundColor: "#0056CC" },
+                }}
+              >
+                {t('save')}
+              </Button>
+            )}
           </DialogActions>
         </Dialog>
 
@@ -1286,10 +1389,10 @@ function Calendar() {
 
         {/* Recommendation Component */}
         {showRecommendation && (
-          <Recommendation 
+          <Recommendation
             calendarId={calendarId}
             currentUserName={userName}
-            currentUserSelections={selectedDays}
+            currentUserSelections={{ ...selectedDays, timeSlots }}
             onClose={() => setShowRecommendation(false)}
           />
         )}

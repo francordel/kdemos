@@ -116,7 +116,20 @@ const translations = {
     othersVoted: 'Otros han votado',
     clearVote: 'Borrar voto',
     removeVote: 'Voto en blanco',
-    blankVote: 'Voto en blanco'
+    blankVote: 'Voto en blanco',
+
+    // Time slots (franjas horarias)
+    timeSlotsTitle: '¿En qué franjas puedes? (opcional)',
+    slot_morning: 'Por la mañana',
+    slot_midMorning: 'A media mañana',
+    slot_midday: 'A la hora de la comida',
+    slot_afternoon: 'Por la tarde',
+    slot_night: 'Por la noche',
+    slot_dawn: 'De madrugada',
+    save: 'Guardar',
+    saving: 'Guardando...',
+    bestTimeSlot: 'Mejor franja',
+    timeSlotsBreakdown: 'Disponibilidad por franja'
   },
   
   en: {

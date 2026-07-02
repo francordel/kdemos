@@ -1,3 +1,40 @@
+// Serializa el objeto selectedDays (green/red/orange + timeSlots opcional)
+// al formato tipado de Firestore para un usuario.
+function serializeUser(userId, selectedDays) {
+  const toDayArray = (days) => ({
+    arrayValue: { values: (days || []).map((day) => ({ stringValue: day })) }
+  });
+
+  const fields = {
+    green: toDayArray(selectedDays.green),
+    red: toDayArray(selectedDays.red),
+    orange: toDayArray(selectedDays.orange)
+  };
+
+  // Franjas horarias: mapa fecha -> array de franjas (solo si hay alguna)
+  const timeSlots = selectedDays.timeSlots || {};
+  const slotFields = {};
+  for (const [dateStr, slots] of Object.entries(timeSlots)) {
+    if (Array.isArray(slots) && slots.length > 0) {
+      slotFields[dateStr] = {
+        arrayValue: { values: slots.map((s) => ({ stringValue: s })) }
+      };
+    }
+  }
+  if (Object.keys(slotFields).length > 0) {
+    fields.timeSlots = { mapValue: { fields: slotFields } };
+  }
+
+  return {
+    mapValue: {
+      fields: {
+        userId: { stringValue: userId },
+        selectedDays: { mapValue: { fields } }
+      }
+    }
+  };
+}
+
 export async function onRequestPost({ request, env }) {
     try {
       const { calendarId, userId, selectedDays } = await request.json();
@@ -32,71 +69,17 @@ export async function onRequestPost({ request, env }) {
       for (const user of users) {
         const fields = user.mapValue.fields;
         const uid = fields.userId.stringValue;
-  
+
         if (uid === userId) {
           userExists = true;
-          updatedUsers.push({
-            mapValue: {
-              fields: {
-                userId: { stringValue: userId },
-                selectedDays: {
-                  mapValue: {
-                    fields: {
-                      green: {
-                        arrayValue: {
-                          values: selectedDays.green.map(day => ({ stringValue: day }))
-                        }
-                      },
-                      red: {
-                        arrayValue: {
-                          values: selectedDays.red.map(day => ({ stringValue: day }))
-                        }
-                      },
-                      orange: {
-                        arrayValue: {
-                          values: selectedDays.orange.map(day => ({ stringValue: day }))
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          });
+          updatedUsers.push(serializeUser(userId, selectedDays));
         } else {
           updatedUsers.push(user);
         }
       }
-  
+
       if (!userExists) {
-        updatedUsers.push({
-          mapValue: {
-            fields: {
-              userId: { stringValue: userId },
-              selectedDays: {
-                mapValue: {
-                  fields: {
-                    green: {
-                      arrayValue: {
-                        values: selectedDays.green.map(day => ({ stringValue: day }))
-                      }
-                    },
-                    red: {
-                      arrayValue: {
-                        values: selectedDays.red.map(day => ({ stringValue: day }))
-                      }
-                    },
-                    orange: {
-                      arrayValue: {
-                        values: selectedDays.orange.map(day => ({ stringValue: day }))
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        });
+        updatedUsers.push(serializeUser(userId, selectedDays));
       }
   
       const patchRes = await fetch(url, {

@@ -33,6 +33,8 @@ import { format } from 'date-fns';
 import { es, enUS } from 'date-fns/locale';
 import { useLanguage } from '../contexts/LanguageContext';
 import { fetchCalendarSelections } from '../services';
+import { TIME_SLOTS } from '../pages/CalendarUtils';
+import { buildRecommendations } from '../utils/recommendation';
 import { useTheme } from '@mui/material/styles';
 
 const Recommendation = ({ calendarId, currentUserName, currentUserSelections, onClose }) => {
@@ -50,80 +52,25 @@ const Recommendation = ({ calendarId, currentUserName, currentUserSelections, on
         setCurrentDateIndex((prev) => (prev < recommendedDates.length - 1 ? prev + 1 : prev));
     };
 
-    const generateDetailedExplanation = (date, allSelections) => {
-        const details = {
-            available: [],
-            unavailable: [],
-            maybe: []
-        };
-
-        allSelections.forEach(user => {
-            if (user.selectedDays.green?.includes(date)) {
-                details.available.push(user.userId);
-            } else if (user.selectedDays.red?.includes(date)) {
-                details.unavailable.push(user.userId);
-            } else if (user.selectedDays.orange?.includes(date)) {
-                details.maybe.push(user.userId);
-            }
-        });
-
-        return details;
-    };
-
     const analyzeDates = useCallback(async () => {
         try {
             setLoading(true);
-            
+
             // Fetch all user selections
             let allUserSelections = await fetchCalendarSelections(calendarId);
             // Remove any existing entry for the current user
             allUserSelections = allUserSelections.filter(user => user.userId !== currentUserName);
-            
+
             // Include current user selections
             const currentUserData = {
                 userId: currentUserName,
                 selectedDays: currentUserSelections
             };
-            
+
             const completeSelections = [...allUserSelections, currentUserData];
 
-            // Collect all dates that have been selected by any user
-            const allDates = new Set();
-            
-            completeSelections.forEach(user => {
-                if (user.selectedDays) {
-                    [...(user.selectedDays.green || []), 
-                     ...(user.selectedDays.red || []), 
-                     ...(user.selectedDays.orange || [])].forEach(date => {
-                        allDates.add(date);
-                    });
-                }
-            });
-
-            // Calculate scores for each date
-            const dateScores = Array.from(allDates).map(date => {
-                const details = generateDetailedExplanation(date, completeSelections);
-                const score = details.available.length * 2 + details.maybe.length * 1 - details.unavailable.length * 0.5;
-                
-                return {
-                    date,
-                    score,
-                    counts: {
-                        yes: details.available.length,
-                        no: details.unavailable.length,
-                        maybe: details.maybe.length
-                    },
-                    details
-                };
-            });
-
-            // Sort by score and filter out dates with negative scores
-            const sortedDates = dateScores
-                .filter(item => item.score > 0)
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 5); // Top 5 recommendations
-
-            setRecommendedDates(sortedDates);
+            // Ranking de fechas recomendadas (fecha + mejor franja)
+            setRecommendedDates(buildRecommendations(completeSelections));
             setLoading(false);
         } catch (error) {
             console.error('Error analyzing dates:', error);
@@ -301,6 +248,19 @@ const Recommendation = ({ calendarId, currentUserName, currentUserSelections, on
                                                 height: { xs: 20, sm: 24 }
                                             }}
                                         />
+                                        {currentRecommendation?.bestSlot && (
+                                            <Chip
+                                                label={`🕐 ${t('bestTimeSlot')}: ${t('slot_' + currentRecommendation.bestSlot)}`}
+                                                size="small"
+                                                sx={{
+                                                    backgroundColor: "#E3F2FD",
+                                                    color: "#1565C0",
+                                                    fontWeight: 600,
+                                                    fontSize: { xs: "0.6rem", sm: "0.75rem" },
+                                                    height: { xs: 20, sm: 24 }
+                                                }}
+                                            />
+                                        )}
                                     </Stack>
                                 </Box>
 
@@ -412,6 +372,45 @@ const Recommendation = ({ calendarId, currentUserName, currentUserSelections, on
                                     </CardContent>
                                 </Card>
                             </Stack>
+                        )}
+
+                        {/* Time-slot breakdown */}
+                        {currentRecommendation?.anySlots && (
+                            <Paper
+                                elevation={0}
+                                sx={{
+                                    border: "1px solid #E5E5EA",
+                                    borderRadius: 2,
+                                    p: { xs: 2, sm: 2.5 },
+                                    mb: { xs: 2, sm: 3 }
+                                }}
+                            >
+                                <Typography
+                                    variant="subtitle1"
+                                    fontWeight={600}
+                                    sx={{ mb: 1.5, color: theme.palette.mode === 'dark' ? '#FFF' : '#1C1C1E' }}
+                                >
+                                    {t('timeSlotsBreakdown')}
+                                </Typography>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                                    {TIME_SLOTS.filter(s => currentRecommendation.slotCounts[s] > 0).map(s => {
+                                        const isBest = s === currentRecommendation.bestSlot;
+                                        return (
+                                            <Chip
+                                                key={s}
+                                                label={`${t('slot_' + s)} · ${currentRecommendation.slotCounts[s]}`}
+                                                size="small"
+                                                sx={{
+                                                    backgroundColor: isBest ? '#007AFF' : '#F0F9FF',
+                                                    color: isBest ? '#fff' : '#1565C0',
+                                                    fontWeight: isBest ? 700 : 500,
+                                                    border: '1px solid #007AFF'
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </Box>
+                            </Paper>
                         )}
 
                         {/* Detailed Breakdown */}

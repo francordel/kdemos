@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog de KDEMOS — Organización de quedadas y reuniones</title>
+  <meta name="description" content="Guías, comparativas y consejos para organizar quedadas y reuniones con grupos. Cómo elegir la mejor alternativa a Doodle, When2meet y más."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://kdemos.com/blog/"/>
+  <link rel="alternate" hreflang="es" href="https://kdemos.com/blog/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://kdemos.com/blog/"/>
+  <meta property="og:title" content="Blog de KDEMOS — Organización de quedadas"/>
+  <meta property="og:description" content="Guías y comparativas para coordinar reuniones y quedadas en grupo. Gratuito y sin registro."/>
+  <meta property="og:image" content="https://kdemos.com/images/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://kdemos.com/images/og.png"/>
+  <link rel="icon" type="image/png" href="/images/KDEMOS_logo.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog de KDEMOS",
+    "url": "https://kdemos.com/blog/",
+    "description": "Guías y comparativas para organizar quedadas y reuniones en grupo",
+    "inLanguage": ["es", "en"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "KDEMOS",
+      "url": "https://kdemos.com/"
+    }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.7; }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { background: #1a1a2e; border-bottom: 1px solid #1a73e8; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    header .logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    header nav a { color: #ccc; margin-left: 20px; font-size: 0.9rem; }
+    header nav a.active { color: #1a73e8; font-weight: 600; }
+    .hero { background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); padding: 56px 24px 40px; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: #fff; font-weight: 800; max-width: 700px; margin: 0 auto 12px; }
+    .hero p { font-size: 1.05rem; color: #aaa; max-width: 540px; margin: 0 auto; }
+    .container { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    .section-title { font-size: 1.1rem; color: #1a73e8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid #2a2a3e; }
+    .articles { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-bottom: 48px; }
+    .card { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px; padding: 24px; transition: border-color .2s, transform .2s; display: flex; flex-direction: column; }
+    .card:hover { border-color: #1a73e8; transform: translateY(-2px); text-decoration: none; }
+    .card-tag { display: inline-block; background: #1a2640; color: #1a73e8; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; border: 1px solid #1a73e8; }
+    .card-tag.green { color: #4caf50; border-color: #4caf50; background: #0d2010; }
+    .card h2 { font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    .card p { font-size: 0.9rem; color: #aaa; margin-bottom: 16px; flex: 1; }
+    .card-meta { font-size: 0.8rem; color: #555; }
+    .card-link { display: inline-flex; align-items: center; gap: 6px; color: #1a73e8; font-size: 0.875rem; font-weight: 600; margin-top: auto; }
+    .card-link::after { content: '→'; }
+    .lang-badge { display: inline-block; font-size: 0.7rem; background: #2a2a3e; color: #aaa; padding: 2px 7px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+    .cta { background: linear-gradient(135deg, #0d1b2a, #1a1a2e); text-align: center; padding: 48px 24px; border-top: 1px solid #2a2a3e; }
+    .btn { display: inline-block; background: #1a73e8; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 1rem; font-weight: 600; transition: background .2s; }
+    .btn:hover { background: #1558b0; text-decoration: none; }
+    footer { background: #0a0a14; text-align: center; padding: 24px; color: #555; font-size: 0.85rem; border-top: 1px solid #1a1a2e; }
+    @media (max-width: 640px) {
+      header { flex-wrap: wrap; gap: 10px; }
+      header nav { display: flex; gap: 14px; }
+      .hero { padding: 36px 16px 28px; }
+      .hero h1 { font-size: 1.6rem; }
+      .container { padding: 32px 16px; }
+      .articles { grid-template-columns: 1fr; gap: 14px; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">KDEMOS</a>
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/blog/" class="active">Blog</a>
+    <a href="/en/doodle-alternative/">English</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Blog de KDEMOS</h1>
+  <p>Guías, comparativas y consejos para organizar quedadas y reuniones con grupos, sin complicaciones.</p>
+</div>
+
+<div class="container">
+
+  <p class="section-title">Comparativas · Alternativas</p>
+  <div class="articles">
+
+    <a href="/alternativa-doodle/" class="card">
+      <span class="card-tag">Comparativa <span class="lang-badge">ES</span></span>
+      <h2>Alternativa a Doodle en español — gratis y sin registro</h2>
+      <p>KDEMOS hace lo mismo que Doodle pero sin necesitar cuenta, sin anuncios y en español. Comparativa completa con tabla de características.</p>
+      <span class="card-link">Leer artículo</span>
+    </a>
+
+    <a href="/alternativa-when2meet/" class="card">
+      <span class="card-tag">Comparativa <span class="lang-badge">ES</span></span>
+      <h2>Alternativa a When2meet más fácil en el móvil</h2>
+      <p>When2meet funciona, pero su interfaz de 2006 es horrible en el móvil. Aquí te explicamos por qué KDEMOS es una mejor opción para grupos de WhatsApp.</p>
+      <span class="card-link">Leer artículo</span>
+    </a>
+
+    <a href="/en/doodle-alternative/" class="card">
+      <span class="card-tag green">Comparison <span class="lang-badge">EN</span></span>
+      <h2>Free Doodle alternative — no sign-up, no ads</h2>
+      <p>A side-by-side comparison of KDEMOS and Doodle. Spoiler: KDEMOS covers 90% of use cases with zero cost and zero registration.</p>
+      <span class="card-link">Read article</span>
+    </a>
+
+    <a href="/en/when2meet-alternative/" class="card">
+      <span class="card-tag green">Comparison <span class="lang-badge">EN</span></span>
+      <h2>Modern When2meet alternative that works on mobile</h2>
+      <p>When2meet is reliable but its drag-to-select interface fails on touchscreens. KDEMOS brings the same idea with a mobile-first design.</p>
+      <span class="card-link">Read article</span>
+    </a>
+
+  </div>
+
+  <p class="section-title">Guías · Cómo organizar</p>
+  <div class="articles">
+
+    <a href="/como-organizar-quedada-whatsapp/" class="card">
+      <span class="card-tag">Guía <span class="lang-badge">ES</span></span>
+      <h2>Cómo organizar una quedada por WhatsApp paso a paso</h2>
+      <p>La guía definitiva para coordinar una quedada con tu grupo de WhatsApp sin que acabe en un caos de mensajes. Con plantillas de texto y herramientas gratuitas.</p>
+      <span class="card-link">Leer guía</span>
+    </a>
+
+    <a href="/en/how-to-schedule-group-meeting/" class="card">
+      <span class="card-tag green">Guide <span class="lang-badge">EN</span></span>
+      <h2>How to schedule a group meeting without the chaos</h2>
+      <p>Step-by-step guide to finding a date that works for everyone — from picking candidates to sharing a poll and reading the results.</p>
+      <span class="card-link">Read guide</span>
+    </a>
+
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2 style="color:#fff;font-size:1.6rem;margin-bottom:12px;">¿Listo para organizar tu primera quedada?</h2>
+  <p style="color:#aaa;margin-bottom:28px;">Gratis, sin registro, en 30 segundos.</p>
+  <a href="/" class="btn">Crear calendario →</a>
+</div>
+
+<footer>
+  <p>© 2025 KDEMOS — <a href="/">kdemos.com</a> · <a href="/alternativa-doodle/">vs Doodle</a> · <a href="/alternativa-when2meet/">vs When2meet</a></p>
+</footer>
+</body>
+</html>

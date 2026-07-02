@@ -100,6 +100,24 @@ function Header() {
               {t('home')}
             </Button>
 
+            <Button
+              component="a"
+              href="/blog/"
+              sx={{
+                color: '#8E8E93',
+                fontWeight: 500,
+                textTransform: 'none',
+                px: 2,
+                borderRadius: 1.5,
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 122, 255, 0.04)',
+                  color: '#007AFF',
+                },
+              }}
+            >
+              Blog
+            </Button>
+
             <Divider orientation="vertical" flexItem sx={{ mx: 1, borderColor: 'divider' }} />
 
             {/* Language Selector */}

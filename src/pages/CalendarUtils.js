@@ -1,3 +1,6 @@
+// Franjas horarias del día, en orden. La etiqueta visible se resuelve con i18n: t('slot_' + key)
+export const TIME_SLOTS = ['morning', 'midMorning', 'midday', 'afternoon', 'night', 'dawn'];
+
 // Pastel color palette for users
 const getUserColor = (userName, isCurrentUser = false) => {
   const pastelColors = [

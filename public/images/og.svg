@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g stroke="#1e2a3a" stroke-width="1">
+    <line x1="0" y1="126" x2="1200" y2="126"/>
+    <line x1="0" y1="252" x2="1200" y2="252"/>
+    <line x1="0" y1="378" x2="1200" y2="378"/>
+    <line x1="0" y1="504" x2="1200" y2="504"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Calendar icon (right) -->
+  <g transform="translate(870, 160)">
+    <rect x="0" y="0" width="220" height="220" rx="20" fill="none" stroke="#1a73e8" stroke-width="6"/>
+    <rect x="0" y="0" width="220" height="55" rx="20" fill="#1a73e8"/>
+    <rect x="0" y="35" width="220" height="20" fill="#1a73e8"/>
+    <!-- circles = days -->
+    <circle cx="37" cy="110" r="14" fill="#1a73e8" opacity="0.9"/>
+    <circle cx="110" cy="110" r="14" fill="#4caf50"/>
+    <circle cx="183" cy="110" r="14" fill="#1a73e8" opacity="0.5"/>
+    <circle cx="37" cy="170" r="14" fill="#4caf50"/>
+    <circle cx="110" cy="170" r="14" fill="#1a73e8" opacity="0.9"/>
+    <circle cx="183" cy="170" r="14" fill="#1a73e8" opacity="0.3"/>
+    <!-- checkmark on green -->
+    <path d="M98 107 l8 8 l14-14" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 167 l8 8 l14-14" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Text -->
+  <text x="80" y="240" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="#1a73e8" letter-spacing="-2">KDEMOS</text>
+  <text x="82" y="320" font-family="Arial, sans-serif" font-weight="400" font-size="32" fill="#aaa">Organiza quedadas y reuniones · Gratis</text>
+
+  <!-- Pills -->
+  <rect x="82" y="360" width="165" height="44" rx="22" fill="#1a2640" stroke="#1a73e8" stroke-width="1.5"/>
+  <text x="164" y="387" font-family="Arial, sans-serif" font-size="20" fill="#1a73e8" text-anchor="middle">Sin registro</text>
+
+  <rect x="262" y="360" width="155" height="44" rx="22" fill="#1a2640" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="340" y="387" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" text-anchor="middle">100% gratis</text>
+
+  <rect x="432" y="360" width="185" height="44" rx="22" fill="#1a2640" stroke="#1a73e8" stroke-width="1.5"/>
+  <text x="525" y="387" font-family="Arial, sans-serif" font-size="20" fill="#1a73e8" text-anchor="middle">Tiempo real</text>
+
+  <!-- Domain -->
+  <text x="80" y="540" font-family="Arial, sans-serif" font-size="26" fill="#3a5070">kdemos.com</text>
+</svg>
