@@ -157,3 +157,16 @@ export const fetchCalendarSelections = async (calendarId) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     return calendarExists(calendarId) ? mockDatabase[calendarId].users : [];
 };
+
+// Día definitivo (en memoria, para tests y modo mock)
+const finalDates = {};
+
+export const fetchCalendarInfo = async (calendarId) => {
+    const users = await fetchCalendarSelections(calendarId);
+    return { users, finalDate: finalDates[calendarId] || null };
+};
+
+export const setCalendarFinalDate = async (calendarId, finalDate) => {
+    finalDates[calendarId] = finalDate || null;
+    return true;
+};

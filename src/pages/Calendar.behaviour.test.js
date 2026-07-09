@@ -9,10 +9,16 @@ import Calendar from './Calendar';
 const mockSave = jest.fn();
 const mockGetUser = jest.fn();
 const mockFetch = jest.fn();
+const mockSetFinal = jest.fn();
 jest.mock('../services', () => ({
   saveUserSelections: (...a) => mockSave(...a),
   getUserFromCalendar: (...a) => mockGetUser(...a),
-  fetchCalendarSelections: (...a) => mockFetch(...a)
+  fetchCalendarSelections: (...a) => mockFetch(...a),
+  // fetchCalendarInfo comparte el mock de fetch: {users, finalDate}
+  fetchCalendarInfo: async (...a) => ({ users: await mockFetch(...a), finalDate: null }),
+  setCalendarFinalDate: (...a) => mockSetFinal(...a),
+  getPublicConfig: async () => ({ googleClientId: null, notificationsEnabled: false }),
+  subscribeNotifications: async () => ({ ok: false, error: 'test' })
 }));
 
 const renderCalendar = (entry = '/mycal?name=Ana') =>

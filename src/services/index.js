@@ -19,6 +19,21 @@ export const {
   saveUserSelections
 } = selected;
 
+// Día definitivo: con fallback para modos que aún no lo implementen (firebase)
+export const fetchCalendarInfo =
+  selected.fetchCalendarInfo ||
+  (async (calendarId) => ({ users: await selected.fetchCalendarSelections(calendarId), finalDate: null }));
+
+export const setCalendarFinalDate =
+  selected.setCalendarFinalDate || (async () => false);
+
+// Notificaciones por email (opcional, requiere GOOGLE_CLIENT_ID en el backend)
+export const getPublicConfig =
+  selected.getPublicConfig || (async () => ({ googleClientId: null, notificationsEnabled: false }));
+
+export const subscribeNotifications =
+  selected.subscribeNotifications || (async () => ({ ok: false, error: 'No disponible' }));
+
 // Helper function to get specific user data from calendar
 export const getUserFromCalendar = async (calendarId, userName) => {
   try {

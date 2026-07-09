@@ -1,6 +1,7 @@
 // Serializa el objeto selectedDays (green/red/orange + timeSlots opcional)
 // al formato tipado de Firestore para un usuario.
-function serializeUser(userId, selectedDays) {
+// extraFields: campos previos a conservar (email/notify de las suscripciones).
+function serializeUser(userId, selectedDays, extraFields = {}) {
   const toDayArray = (days) => ({
     arrayValue: { values: (days || []).map((day) => ({ stringValue: day })) }
   });
@@ -25,14 +26,46 @@ function serializeUser(userId, selectedDays) {
     fields.timeSlots = { mapValue: { fields: slotFields } };
   }
 
-  return {
-    mapValue: {
-      fields: {
-        userId: { stringValue: userId },
-        selectedDays: { mapValue: { fields } }
-      }
-    }
+  const userFields = {
+    userId: { stringValue: userId },
+    selectedDays: { mapValue: { fields } }
   };
+  if (extraFields.email) userFields.email = extraFields.email;
+  if (extraFields.notify) userFields.notify = extraFields.notify;
+
+  return { mapValue: { fields: userFields } };
+}
+
+// Aviso por email a los demás participantes suscritos. Best-effort: si no hay
+// RESEND_API_KEY o falla el envío, el guardado no se ve afectado.
+async function notifySubscribers(env, calendarId, voterId, users) {
+  if (!env.RESEND_API_KEY) return;
+
+  const recipients = users
+    .map((u) => u.mapValue.fields)
+    .filter((f) => f.notify?.booleanValue && f.email?.stringValue && f.userId.stringValue !== voterId)
+    .map((f) => f.email.stringValue);
+
+  if (recipients.length === 0) return;
+
+  const link = `https://kdemos.com/${calendarId}`;
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: env.NOTIFY_FROM || "KDEMOS <avisos@kdemos.com>",
+        to: recipients,
+        subject: `${voterId} ha votado en tu calendario KDEMOS`,
+        text: `${voterId} acaba de marcar su disponibilidad en el calendario "${calendarId}".\n\nMira cómo va la votación: ${link}\n\n—\nRecibes este aviso porque activaste las notificaciones en ese calendario. Para dejar de recibirlas, entra en el calendario y desactívalas.`,
+      }),
+    });
+  } catch (err) {
+    console.error("Notificación fallida:", err.message);
+  }
 }
 
 export async function onRequestPost({ request, env }) {
@@ -72,7 +105,8 @@ export async function onRequestPost({ request, env }) {
 
         if (uid === userId) {
           userExists = true;
-          updatedUsers.push(serializeUser(userId, selectedDays));
+          // Conserva email/notify si el usuario tenía avisos activados
+          updatedUsers.push(serializeUser(userId, selectedDays, { email: fields.email, notify: fields.notify }));
         } else {
           updatedUsers.push(user);
         }
@@ -82,7 +116,10 @@ export async function onRequestPost({ request, env }) {
         updatedUsers.push(serializeUser(userId, selectedDays));
       }
   
-      const patchRes = await fetch(url, {
+      // updateMask limita el PATCH a users/password: sin él, cada guardado
+      // borraba el resto de campos del doc (createdAt, finalDate).
+      const patchUrl = `${url}&updateMask.fieldPaths=users&updateMask.fieldPaths=password`;
+      const patchRes = await fetch(patchUrl, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -107,6 +144,9 @@ export async function onRequestPost({ request, env }) {
         });
       }
   
+      // Avisa a los suscritos (best-effort, no bloquea la respuesta si falla)
+      await notifySubscribers(env, calendarId, userId, updatedUsers);
+
       return new Response(JSON.stringify({ ok: true, totalUsers: updatedUsers.length }), {
         status: 200,
         headers: { "Content-Type": "application/json" }

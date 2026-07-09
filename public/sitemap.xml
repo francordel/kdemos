@@ -53,4 +53,35 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://kdemos.com/como-organizar-quedada-whatsapp/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://kdemos.com/en/how-to-schedule-group-meeting/"/>
   </url>
+  <url>
+    <loc>https://kdemos.com/encuesta-doodle-gratis/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kdemos.com/alternativa-rallly/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kdemos.com/alternativa-rallly/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kdemos.com/en/rallly-alternative/"/>
+  </url>
+  <url>
+    <loc>https://kdemos.com/en/rallly-alternative/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kdemos.com/alternativa-rallly/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kdemos.com/en/rallly-alternative/"/>
+  </url>
+  <!-- Landings por idioma (hreflang completo declarado dentro de cada página) -->
+  <url><loc>https://kdemos.com/en/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/de/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/fr/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/it/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/pt/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/nl/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/ca/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/pl/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/da/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/sv/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kdemos.com/no/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>

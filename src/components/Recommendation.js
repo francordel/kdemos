@@ -29,8 +29,7 @@ import {
   CalendarToday as CalendarIcon,
   TrendingUp as TrendingUpIcon
 } from '@mui/icons-material';
-import { format } from 'date-fns';
-import { es, enUS } from 'date-fns/locale';
+import { formatDayLong } from '../i18n/locales';
 import { useLanguage } from '../contexts/LanguageContext';
 import { fetchCalendarSelections } from '../services';
 import { TIME_SLOTS } from '../pages/CalendarUtils';
@@ -217,11 +216,7 @@ const Recommendation = ({ calendarId, currentUserName, currentUserSelections, on
                                             lineHeight: 1.2
                                         }}
                                     >
-                                        {currentRecommendation && format(
-                                            new Date(currentRecommendation.date), 
-                                            language === 'es' ? "EEEE, dd 'de' MMMM" : "EEEE, MMMM dd", 
-                                            { locale: language === 'es' ? es : enUS }
-                                        )}
+                                        {currentRecommendation && formatDayLong(new Date(currentRecommendation.date), language)}
                                     </Typography>
                                     <Stack 
                                         direction={{ xs: "column", sm: "row" }} 

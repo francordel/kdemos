@@ -1,16 +1,19 @@
 import React from 'react';
-import { 
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  Box, 
-  Button, 
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
   IconButton,
   Stack,
   Divider,
   Chip,
-  Avatar
+  Avatar,
+  Select,
+  MenuItem
 } from '@mui/material';
+import { LANGUAGE_NAMES } from '../i18n/locales';
 import {
   CalendarToday as CalendarIcon,
   Home as HomeIcon,
@@ -121,44 +124,26 @@ function Header() {
             <Divider orientation="vertical" flexItem sx={{ mx: 1, borderColor: 'divider' }} />
 
             {/* Language Selector */}
-            <Stack direction="row" spacing={0.5}>
-              <Button
-                startIcon={<LanguageIcon />}
-                onClick={() => changeLanguage('es')}
+            <Stack direction="row" spacing={0.5} alignItems="center">
+              <LanguageIcon sx={{ fontSize: 18, color: '#8E8E93' }} />
+              <Select
+                value={language}
+                onChange={(e) => changeLanguage(e.target.value)}
+                variant="standard"
+                disableUnderline
                 sx={{
-                  color: language === 'es' ? '#007AFF' : '#8E8E93',
-                  fontWeight: language === 'es' ? 600 : 500,
-                  textTransform: 'none',
-                  px: 1.5,
-                  minWidth: 'auto',
-                  borderRadius: 1.5,
                   fontSize: '0.875rem',
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 122, 255, 0.04)',
-                    color: '#007AFF',
-                  },
+                  fontWeight: 500,
+                  color: '#007AFF',
+                  '& .MuiSelect-select': { py: 0.5, pr: 3 },
                 }}
               >
-                ES
-              </Button>
-              <Button
-                onClick={() => changeLanguage('en')}
-                sx={{
-                  color: language === 'en' ? '#007AFF' : '#8E8E93',
-                  fontWeight: language === 'en' ? 600 : 500,
-                  textTransform: 'none',
-                  px: 1.5,
-                  minWidth: 'auto',
-                  borderRadius: 1.5,
-                  fontSize: '0.875rem',
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 122, 255, 0.04)',
-                    color: '#007AFF',
-                  },
-                }}
-              >
-                EN
-              </Button>
+                {Object.entries(LANGUAGE_NAMES).map(([code, name]) => (
+                  <MenuItem key={code} value={code} sx={{ fontSize: '0.875rem' }}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
             </Stack>
 
             <Divider orientation="vertical" flexItem sx={{ mx: 1, borderColor: 'divider' }} />
@@ -273,42 +258,25 @@ function Header() {
             </IconButton>
             
             {/* Mobile Language Selector */}
-            <Button
-              onClick={() => changeLanguage('es')}
+            <Select
+              value={language}
+              onChange={(e) => changeLanguage(e.target.value)}
+              variant="standard"
+              disableUnderline
               sx={{
-                color: language === 'es' ? 'primary.main' : 'text.secondary',
-                fontWeight: language === 'es' ? 600 : 500,
-                textTransform: 'none',
-                px: 1,
-                minWidth: 'auto',
-                borderRadius: 1.5,
                 fontSize: '0.75rem',
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 122, 255, 0.04)',
-                  color: 'primary.main',
-                },
+                fontWeight: 600,
+                color: 'primary.main',
+                '& .MuiSelect-select': { py: 0.5, pr: 2.5 },
               }}
+              renderValue={(code) => code.toUpperCase()}
             >
-              ES
-            </Button>
-            <Button
-              onClick={() => changeLanguage('en')}
-              sx={{
-                color: language === 'en' ? 'primary.main' : 'text.secondary',
-                fontWeight: language === 'en' ? 600 : 500,
-                textTransform: 'none',
-                px: 1,
-                minWidth: 'auto',
-                borderRadius: 1.5,
-                fontSize: '0.75rem',
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 122, 255, 0.04)',
-                  color: 'primary.main',
-                },
-              }}
-            >
-              EN
-            </Button>
+              {Object.entries(LANGUAGE_NAMES).map(([code, name]) => (
+                <MenuItem key={code} value={code} sx={{ fontSize: '0.8rem' }}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
             
             {/* Mobile Theme Toggle */}
             <IconButton

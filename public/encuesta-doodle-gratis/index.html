@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crear una encuesta tipo Doodle gratis y sin registro — KDEMOS</title>
+  <meta name="description" content="Crea una encuesta tipo Doodle gratis, sin registro y sin límites: propón fechas, comparte el enlace por WhatsApp y encuentra el mejor día para todos en minutos."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://kdemos.com/encuesta-doodle-gratis/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://kdemos.com/encuesta-doodle-gratis/"/>
+  <meta property="og:title" content="Crear una encuesta tipo Doodle gratis — KDEMOS"/>
+  <meta property="og:description" content="Encuesta de fechas gratis, sin registro y sin límites. Comparte el enlace por WhatsApp y encuentra el mejor día para quedar."/>
+  <meta property="og:image" content="https://kdemos.com/images/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://kdemos.com/images/og.png"/>
+  <link rel="icon" type="image/png" href="/images/KDEMOS_logo.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Cómo crear una encuesta tipo Doodle gratis",
+    "description": "Crear una encuesta de disponibilidad gratis y sin registro con KDEMOS",
+    "step": [
+      { "@type": "HowToStep", "name": "Crea el calendario", "text": "Entra en kdemos.com, escribe tu nombre y pulsa Crear calendario. Sin registro." },
+      { "@type": "HowToStep", "name": "Elige las fechas", "text": "Marca los días candidatos en el calendario y copia el enlace único." },
+      { "@type": "HowToStep", "name": "Comparte y decide", "text": "Pega el enlace en tu grupo de WhatsApp: cada persona marca sus días y el mejor sale solo." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Puedo crear una encuesta tipo Doodle gratis?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Con KDEMOS creas encuestas de fechas ilimitadas, gratis, sin registro y sin anuncios. Doodle limita las encuestas del plan gratuito y muestra anuncios." } },
+      { "@type": "Question", "name": "¿Necesito una cuenta para votar en la encuesta?", "acceptedAnswer": { "@type": "Answer", "text": "No. Ni el organizador ni los participantes necesitan cuenta: cada persona abre el enlace, escribe su nombre y marca sus días." } },
+      { "@type": "Question", "name": "¿Cuántas encuestas puedo crear?", "acceptedAnswer": { "@type": "Answer", "text": "Ilimitadas. No hay plan de pago: todo KDEMOS es gratuito." } }
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.7; }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { background: #1a1a2e; border-bottom: 1px solid #1a73e8; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    header .logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    header nav a { color: #ccc; margin-left: 20px; font-size: 0.9rem; }
+    .hero { background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); padding: 60px 24px 48px; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; font-weight: 800; max-width: 760px; margin: 0 auto 16px; }
+    .hero p { font-size: 1.1rem; color: #aaa; max-width: 600px; margin: 0 auto 32px; }
+    .btn { display: inline-block; background: #1a73e8; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 1rem; font-weight: 600; transition: background .2s; }
+    .btn:hover { background: #1558b0; text-decoration: none; }
+    .container { max-width: 820px; margin: 0 auto; padding: 48px 24px; }
+    h2 { font-size: 1.6rem; color: #fff; margin: 40px 0 16px; }
+    h3 { font-size: 1.1rem; color: #1a73e8; margin: 24px 0 8px; }
+    p { margin-bottom: 16px; color: #ccc; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.95rem; }
+    th { background: #1a73e8; color: #fff; padding: 12px 16px; text-align: left; }
+    td { padding: 11px 16px; border-bottom: 1px solid #2a2a3e; color: #ccc; }
+    tr:nth-child(even) td { background: #13131f; }
+    .check { color: #4caf50; font-weight: 700; }
+    .cross { color: #f44336; font-weight: 700; }
+    .highlight { background: #1a2640; border-left: 4px solid #1a73e8; padding: 20px 24px; border-radius: 4px; margin: 32px 0; }
+    .highlight p { color: #ddd; margin: 0; }
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps li { counter-increment: step; display: flex; gap: 16px; margin-bottom: 20px; }
+    .steps li::before { content: counter(step); background: #1a73e8; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+    .steps li p { margin: 0; color: #ccc; }
+    .cta { background: linear-gradient(135deg, #0d1b2a, #1a1a2e); text-align: center; padding: 48px 24px; border-top: 1px solid #2a2a3e; }
+    .cta h2 { margin-top: 0; }
+    footer { background: #0a0a14; text-align: center; padding: 24px; color: #555; font-size: 0.85rem; border-top: 1px solid #1a1a2e; }
+    @media (max-width: 640px) {
+      header { flex-wrap: wrap; gap: 10px; }
+      header nav { display: flex; gap: 14px; }
+      .hero { padding: 36px 16px 28px; }
+      .container { padding: 32px 16px; }
+      table { font-size: 0.82rem; }
+      th, td { padding: 9px 10px; }
+      .steps li { gap: 12px; }
+      .steps li::before { width: 28px; height: 28px; font-size: 0.85rem; flex-shrink: 0; }
+      h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">KDEMOS</a>
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/blog/">Blog</a>
+    <a href="/alternativa-doodle/">vs Doodle</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Crea una encuesta tipo Doodle gratis y sin registro</h1>
+  <p>Propón fechas, comparte un enlace en el grupo y encuentra el mejor día para todos. Sin cuenta, sin anuncios y sin límite de encuestas.</p>
+  <a href="/" class="btn">Crear encuesta gratis →</a>
+</div>
+
+<div class="container">
+
+  <div class="highlight">
+    <p><strong>En 30 segundos:</strong> escribe tu nombre en <a href="/">kdemos.com</a>, marca los días candidatos y comparte el enlace por WhatsApp. Cada persona vota sus días y el mejor sale solo. Eso es una "encuesta Doodle" — sin Doodle.</p>
+  </div>
+
+  <h2>¿Qué es una encuesta tipo Doodle?</h2>
+  <p>Una encuesta de disponibilidad: el organizador propone varias fechas y cada participante marca cuáles le vienen bien. El día con más votos gana. Doodle popularizó el formato, hasta el punto de que "hacer un doodle" se usa como sinónimo de encuesta de fechas.</p>
+  <p>El problema es que Doodle ya no es lo que era: el plan gratuito muestra anuncios, limita las encuestas activas y obliga al organizador a crear una cuenta. Para una quedada de amigos o una reunión puntual, es demasiada fricción.</p>
+
+  <h2>Cómo crear tu encuesta de fechas gratis</h2>
+  <ol class="steps">
+    <li><p>Entra en <a href="/">kdemos.com</a>, escribe tu nombre y pulsa <strong>"Crear calendario"</strong>. No hace falta cuenta ni correo.</p></li>
+    <li><p>Marca en el calendario los días que propones y copia el <strong>enlace único</strong> que se genera.</p></li>
+    <li><p>Pega el enlace en tu grupo de WhatsApp, Telegram o correo. Cada persona lo abre, escribe su nombre y marca sus días. <strong>Los resultados se actualizan en tiempo real.</strong></p></li>
+  </ol>
+
+  <h2>KDEMOS vs Doodle gratis: comparativa</h2>
+  <table>
+    <thead>
+      <tr><th>Característica</th><th>KDEMOS</th><th>Doodle (plan gratis)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Precio</td><td class="check">Gratis siempre</td><td>Gratis con límites</td></tr>
+      <tr><td>Registro del organizador</td><td class="check">No</td><td class="cross">Obligatorio</td></tr>
+      <tr><td>Anuncios</td><td class="check">Ninguno</td><td class="cross">Sí</td></tr>
+      <tr><td>Encuestas activas</td><td class="check">Ilimitadas</td><td class="cross">Limitadas</td></tr>
+      <tr><td>Compartir por WhatsApp</td><td class="check">Un clic</td><td>Manual</td></tr>
+      <tr><td>Resultados en tiempo real</td><td class="check">Sí</td><td class="check">Sí</td></tr>
+      <tr><td>En español</td><td class="check">Sí</td><td class="check">Sí</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Para qué sirve</h2>
+  <h3>Quedadas de amigos</h3>
+  <p>Cena de fin de curso, viaje de fin de semana, partido semanal: propón 4-5 fechas y deja que el grupo vote. Se acabaron los 40 mensajes de "yo ese día no puedo".</p>
+  <h3>Reuniones de trabajo</h3>
+  <p>Comparte el enlace por Slack o correo. Nadie tiene que crear cuenta ni instalar nada — clave cuando participan personas de fuera de tu empresa.</p>
+  <h3>Familias y grupos grandes</h3>
+  <p>La comida de Navidad o el cumpleaños del abuelo: funciona igual con 5 que con 50 personas, y desde cualquier móvil.</p>
+
+  <h2>Preguntas frecuentes</h2>
+  <h3>¿De verdad es gratis? ¿Dónde está el truco?</h3>
+  <p>No hay truco: KDEMOS no tiene plan de pago ni anuncios. Es un proyecto independiente y de código abierto (licencia MIT).</p>
+  <h3>¿Los participantes necesitan cuenta?</h3>
+  <p>No. Abren el enlace, escriben su nombre y marcan sus días. Funciona en cualquier navegador, móvil u ordenador.</p>
+  <h3>¿Cuántas personas pueden votar?</h3>
+  <p>Sin límite: el mismo enlace sirve para 5 amigos o para una asociación de 100 personas.</p>
+  <h3>¿Caduca la encuesta?</h3>
+  <p>No: el calendario sigue activo indefinidamente y puedes volver a él con el mismo enlace.</p>
+
+</div>
+
+<div class="cta">
+  <h2>Crea tu encuesta de fechas ahora</h2>
+  <p style="color:#aaa;margin:12px 0 28px;">Gratis, sin registro, sin anuncios. Como Doodle, pero sin sus límites.</p>
+  <a href="/" class="btn">Crear encuesta gratis →</a>
+</div>
+
+<footer>
+  <p>© 2025 KDEMOS — <a href="/">kdemos.com</a> · <a href="/alternativa-doodle/">KDEMOS vs Doodle</a> · <a href="/alternativa-when2meet/">vs When2meet</a> · <a href="/alternativa-rallly/">vs Rallly</a></p>
+</footer>
+</body>
+</html>

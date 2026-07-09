@@ -119,6 +119,67 @@ export const fetchCalendarSelections = async (calendarId) => {
   }
 };
 
+// Igual que fetchCalendarSelections pero devolviendo también los metadatos
+// del calendario (finalDate). Mantiene la otra función intacta por
+// compatibilidad con el resto de pantallas.
+export const fetchCalendarInfo = async (calendarId) => {
+  try {
+    const res = await fetch(`${API_BASE}/api/fetch?calendarId=${calendarId}`);
+    const contentType = res.headers.get("content-type");
+    if (!contentType?.includes("application/json")) return { users: [], finalDate: null };
+    const data = await res.json();
+    if (!data.ok || !data.exists) return { users: [], finalDate: null };
+    return { users: data.users, finalDate: data.finalDate || null };
+  } catch (err) {
+    console.error("❌ Error en fetchCalendarInfo:", err);
+    return { users: [], finalDate: null };
+  }
+};
+
+// Config pública del backend (features opcionales activas)
+export const getPublicConfig = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/api/config`);
+    if (!res.ok) return { googleClientId: null, notificationsEnabled: false };
+    return await res.json();
+  } catch {
+    return { googleClientId: null, notificationsEnabled: false };
+  }
+};
+
+// Alta/baja de avisos por email (el email sale del idToken verificado en el backend)
+export const subscribeNotifications = async (calendarId, userId, idToken, notify) => {
+  try {
+    const res = await fetch(`${API_BASE}/api/subscribe`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ calendarId, userId, idToken, notify }),
+    });
+    const data = await res.json();
+    return data.ok ? { ok: true, email: data.email } : { ok: false, error: data.error };
+  } catch (err) {
+    return { ok: false, error: err.message };
+  }
+};
+
+// Marca (o desmarca con null) el día definitivo del calendario.
+export const setCalendarFinalDate = async (calendarId, finalDate) => {
+  try {
+    const res = await fetch(`${API_BASE}/api/finalize`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ calendarId, finalDate: finalDate || "" }),
+    });
+    const contentType = res.headers.get("content-type");
+    if (!contentType?.includes("application/json")) return false;
+    const data = await res.json();
+    return data.ok;
+  } catch (err) {
+    console.error("❌ Error en setCalendarFinalDate:", err);
+    return false;
+  }
+};
+
 export const saveUserSelections = async (userId, calendarId, selectedDays) => {
   console.log("📡 Guardando selección:", { userId, calendarId, selectedDays });
   try {

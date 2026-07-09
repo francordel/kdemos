@@ -1,4 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import de from '../i18n/de';
+import fr from '../i18n/fr';
+import it from '../i18n/it';
+import pt from '../i18n/pt';
+import nl from '../i18n/nl';
+import ca from '../i18n/ca';
+import pl from '../i18n/pl';
+import da from '../i18n/da';
+import sv from '../i18n/sv';
+import no from '../i18n/no';
 
 const LanguageContext = createContext();
 
@@ -119,6 +129,7 @@ const translations = {
     blankVote: 'Voto en blanco',
 
     // Time slots (franjas horarias)
+    availabilityQuestion: '¿Cuál es tu disponibilidad para este día?',
     timeSlotsTitle: '¿En qué franjas puedes? (opcional)',
     slot_morning: 'Por la mañana',
     slot_midMorning: 'A media mañana',
@@ -129,7 +140,23 @@ const translations = {
     save: 'Guardar',
     saving: 'Guardando...',
     bestTimeSlot: 'Mejor franja',
-    timeSlotsBreakdown: 'Disponibilidad por franja'
+    timeSlotsBreakdown: 'Disponibilidad por franja',
+
+    // Día definitivo y exportación
+    finalDayTitle: 'Día elegido',
+    markFinalDay: 'Marcar como día definitivo',
+    unmarkFinalDay: 'Quitar día definitivo',
+    addToCalendar: 'Añadir a mi calendario',
+    exportCsv: 'Exportar CSV',
+    participant: 'Participante',
+
+    // Avisos por email
+    notifyTitle: 'Avisos por email',
+    notifyDesc: 'Recibe un email cuando alguien vote en este calendario. Inicia sesión con Google para activarlos.',
+    notifyActiveFor: 'Avisos activados para',
+    notifyDisableHint: 'Para desactivarlos, confirma tu identidad con Google:',
+    notifyPrivacy: 'Solo usamos tu email para estos avisos. Puedes desactivarlos cuando quieras.',
+    notifyFailed: 'No se pudo actualizar la suscripción'
   },
   
   en: {
@@ -238,15 +265,62 @@ const translations = {
     othersVoted: 'Others voted',
     clearVote: 'Clear vote',
     removeVote: 'Remove vote',
-    blankVote: 'Blank vote'
-  }
+    blankVote: 'Blank vote',
+
+    // Time slots
+    availabilityQuestion: 'What is your availability for this day?',
+    timeSlotsTitle: 'Which times of day work for you? (optional)',
+    slot_morning: 'Morning',
+    slot_midMorning: 'Mid-morning',
+    slot_midday: 'Lunch time',
+    slot_afternoon: 'Afternoon',
+    slot_night: 'Evening',
+    slot_dawn: 'Late night',
+    save: 'Save',
+    bestTimeSlot: 'Best time slot',
+    timeSlotsBreakdown: 'Availability by time slot',
+
+    // Final day & export
+    finalDayTitle: 'Final day',
+    markFinalDay: 'Set as final day',
+    unmarkFinalDay: 'Remove final day',
+    addToCalendar: 'Add to my calendar',
+    exportCsv: 'Export CSV',
+    participant: 'Participant',
+
+    // Email notifications
+    notifyTitle: 'Email notifications',
+    notifyDesc: 'Get an email when someone votes in this calendar. Sign in with Google to enable them.',
+    notifyActiveFor: 'Notifications enabled for',
+    notifyDisableHint: 'To turn them off, confirm your identity with Google:',
+    notifyPrivacy: 'We only use your email for these notifications. You can turn them off anytime.',
+    notifyFailed: 'Could not update the subscription'
+  },
+
+  de,
+  fr,
+  it,
+  pt,
+  nl,
+  ca,
+  pl,
+  da,
+  sv,
+  no
 };
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('es');
 
   useEffect(() => {
-    // Get language from localStorage or use browser language
+    // Prioridad: ?lang= (llegada desde las landings por idioma) > localStorage > navegador
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang && translations[urlLang]) {
+      setLanguage(urlLang);
+      localStorage.setItem('calendar-language', urlLang);
+      return;
+    }
+
     const savedLanguage = localStorage.getItem('calendar-language');
     if (savedLanguage && translations[savedLanguage]) {
       setLanguage(savedLanguage);
@@ -267,7 +341,8 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key) => {
-    return translations[language]?.[key] || translations['es'][key] || key;
+    // Fallback en cadena: idioma activo → inglés → español → la clave
+    return translations[language]?.[key] || translations.en[key] || translations.es[key] || key;
   };
 
   const value = {

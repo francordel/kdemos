@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KDEMOS — Troba el millor dia per quedar amb el teu grup, gratis i sense registre</title>
+  <meta name="description" content="Crea una enquesta de disponibilitat, comparteix l’enllaç al grup i troba el dia que va bé a tothom. Alternativa gratuïta a Doodle, sense compte."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://kdemos.com/ca/"/>
+  <link rel="alternate" hreflang="es" href="https://kdemos.com/"/>
+  <link rel="alternate" hreflang="x-default" href="https://kdemos.com/"/>
+  <link rel="alternate" hreflang="en" href="https://kdemos.com/en/"/>
+  <link rel="alternate" hreflang="de" href="https://kdemos.com/de/"/>
+  <link rel="alternate" hreflang="fr" href="https://kdemos.com/fr/"/>
+  <link rel="alternate" hreflang="it" href="https://kdemos.com/it/"/>
+  <link rel="alternate" hreflang="pt" href="https://kdemos.com/pt/"/>
+  <link rel="alternate" hreflang="nl" href="https://kdemos.com/nl/"/>
+  <link rel="alternate" hreflang="ca" href="https://kdemos.com/ca/"/>
+  <link rel="alternate" hreflang="pl" href="https://kdemos.com/pl/"/>
+  <link rel="alternate" hreflang="da" href="https://kdemos.com/da/"/>
+  <link rel="alternate" hreflang="sv" href="https://kdemos.com/sv/"/>
+  <link rel="alternate" hreflang="no" href="https://kdemos.com/no/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://kdemos.com/ca/"/>
+  <meta property="og:title" content="KDEMOS — Troba el millor dia per quedar amb el teu grup, gratis i sense registre"/>
+  <meta property="og:description" content="Crea una enquesta de disponibilitat, comparteix l’enllaç al grup i troba el dia que va bé a tothom. Alternativa gratuïta a Doodle, sense compte."/>
+  <meta property="og:image" content="https://kdemos.com/images/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://kdemos.com/images/og.png"/>
+  <link rel="icon" type="image/png" href="/images/KDEMOS_logo.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "KDEMOS",
+    "url": "https://kdemos.com/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "ca",
+    "description": "Crea una enquesta de disponibilitat, comparteix l’enllaç al grup i troba el dia que va bé a tothom. Alternativa gratuïta a Doodle, sense compte.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "KDEMOS és gratuït? Necessito un compte?", "acceptedAnswer": { "@type": "Answer", "text": "És 100 % gratuït i sense registre: escriu el teu nom i crea o uneix-te a un calendari." } },
+      { "@type": "Question", "name": "És una alternativa a Doodle?", "acceptedAnswer": { "@type": "Answer", "text": "Sí — KDEMOS fa l’essencial de Doodle: trobar el dia que va bé a tothom, gratis i sense compte." } },
+      { "@type": "Question", "name": "Quanta gent pot participar?", "acceptedAnswer": { "@type": "Answer", "text": "Sense límit: el mateix enllaç serveix per a 5 amics o un grup de 100." } },
+      { "@type": "Question", "name": "Serveix per a reunions de feina?", "acceptedAnswer": { "@type": "Answer", "text": "És clar: comparteix l’enllaç per Slack, Teams o correu." } }
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.7; }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { background: #1a1a2e; border-bottom: 1px solid #1a73e8; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    header .logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    .hero { background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); padding: 60px 24px 48px; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; font-weight: 800; max-width: 760px; margin: 0 auto 16px; }
+    .hero p { font-size: 1.1rem; color: #aaa; max-width: 600px; margin: 0 auto 32px; }
+    .btn { display: inline-block; background: #1a73e8; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 1rem; font-weight: 600; margin: 4px; }
+    .btn:hover { background: #1558b0; text-decoration: none; }
+    .btn.ghost { background: transparent; border: 1px solid #1a73e8; color: #1a73e8; }
+    .container { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    h2 { font-size: 1.5rem; color: #fff; margin: 40px 0 18px; text-align: center; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 8px; }
+    .stat { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px; padding: 18px; text-align: center; }
+    .stat .n { display: block; font-size: 1.7rem; font-weight: 800; color: #1a73e8; }
+    .stat .l { display: block; font-weight: 700; color: #fff; margin-top: 2px; }
+    .stat .s { font-size: 0.82rem; color: #888; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .card { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px; padding: 20px; }
+    .card h3 { color: #1a73e8; font-size: 1rem; margin-bottom: 8px; }
+    .card p { color: #aaa; font-size: 0.92rem; margin: 0; }
+    .steps { counter-reset: step; list-style: none; padding: 0; max-width: 620px; margin: 0 auto; }
+    .steps li { counter-increment: step; display: flex; gap: 16px; margin-bottom: 18px; }
+    .steps li::before { content: counter(step); background: #1a73e8; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+    .steps h3 { color: #fff; font-size: 1rem; margin-bottom: 2px; }
+    .steps p { color: #aaa; font-size: 0.92rem; margin: 0; }
+    details { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    summary { color: #fff; font-weight: 600; cursor: pointer; }
+    details p { color: #aaa; margin-top: 8px; font-size: 0.93rem; }
+    .cta { background: linear-gradient(135deg, #0d1b2a, #1a1a2e); text-align: center; padding: 48px 24px; border-top: 1px solid #2a2a3e; }
+    .altnote { text-align: center; color: #667; font-size: 0.85rem; margin-top: 24px; }
+    footer { background: #0a0a14; text-align: center; padding: 24px; color: #555; font-size: 0.82rem; border-top: 1px solid #1a1a2e; line-height: 2; }
+    footer .on { color: #1a73e8; font-weight: 700; }
+    @media (max-width: 640px) {
+      .hero { padding: 36px 16px 28px; }
+      .container { padding: 32px 16px; }
+      .stats { grid-template-columns: 1fr; }
+      h2 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">KDEMOS</a>
+  <nav><a href="/?lang=ca">Crear calendari gratis</a></nav>
+</header>
+
+<div class="hero">
+  <h1>Troba el millor dia per a la vostra quedada</h1>
+  <p>Crea un calendari, comparteix l’enllaç per WhatsApp i cadascú marca els seus dies. El millor dia surt sol. Gratis, sense registre.</p>
+  <a href="/?lang=ca" class="btn">Crear calendari gratis →</a>
+  <a href="/?lang=ca" class="btn ghost">Unir-me a un calendari</a>
+</div>
+
+<div class="container">
+
+  <div class="stats">
+    <div class="stat"><span class="n">100%</span><span class="l">Gratuït</span><span class="s">Sense plans de pagament ni anuncis</span></div>
+    <div class="stat"><span class="n">0</span><span class="l">Registres</span><span class="s">Escriu el teu nom i llestos</span></div>
+    <div class="stat"><span class="n">∞</span><span class="l">Calendaris</span><span class="s">Sense límits ni caducitat</span></div>
+  </div>
+
+  <h2>Per què KDEMOS?</h2>
+  <div class="grid">
+    <div class="card"><h3>A punt en 30 segons</h3><p>Sense compte, sense instal·lar res. Escriu el nom, tria els dies i comparteix l’enllaç.</p></div>
+    <div class="card"><h3>Pensat per a grups de WhatsApp</h3><p>Compartir amb un clic per WhatsApp i Telegram. Funciona a qualsevol mòbil.</p></div>
+    <div class="card"><h3>Resultats en temps real</h3><p>Tothom veu les disponibilitats actualitzar-se a l’instant.</p></div>
+    <div class="card"><h3>Una alternativa a Doodle gratuïta de debò</h3><p>Sense pla gratuït limitat ni anuncis: enquestes il·limitades, per sempre.</p></div>
+  </div>
+
+  <h2>Com funciona</h2>
+  <ol class="steps">
+    <li><div><h3>Crea el calendari</h3><p>Escriu el teu nom i selecciona els dies possibles.</p></div></li>
+    <li><div><h3>Comparteix l’enllaç</h3><p>Enganxa’l al grup de WhatsApp, Telegram o Slack.</p></div></li>
+    <li><div><h3>Tria el dia</h3><p>Cadascú marca els seus dies; el millor dia apareix en temps real.</p></div></li>
+  </ol>
+
+  <h2>Preguntes freqüents</h2>
+  <details><summary>KDEMOS és gratuït? Necessito un compte?</summary><p>És 100 % gratuït i sense registre: escriu el teu nom i crea o uneix-te a un calendari.</p></details>
+  <details><summary>És una alternativa a Doodle?</summary><p>Sí — KDEMOS fa l’essencial de Doodle: trobar el dia que va bé a tothom, gratis i sense compte.</p></details>
+  <details><summary>Quanta gent pot participar?</summary><p>Sense límit: el mateix enllaç serveix per a 5 amics o un grup de 100.</p></details>
+  <details><summary>Serveix per a reunions de feina?</summary><p>És clar: comparteix l’enllaç per Slack, Teams o correu.</p></details>
+
+  <p class="altnote">Alternativa gratuïta a Doodle, When2meet i Rallly.</p>
+
+</div>
+
+<div class="cta">
+  <h2 style="margin-top:0;">A punt per trobar el vostre dia?</h2>
+  <p style="color:#aaa;margin:10px 0 26px;">Gratis, sense registre, en menys d’un minut.</p>
+  <a href="/?lang=ca" class="btn">Crear calendari gratis →</a>
+</div>
+
+<footer>
+  <div>Idioma: <a href="/">Español</a> · <a href="/en/">English</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/it/">Italiano</a> · <a href="/pt/">Português</a> · <a href="/nl/">Nederlands</a> · <a href="/ca/" class="on">Català</a> · <a href="/pl/">Polski</a> · <a href="/da/">Dansk</a> · <a href="/sv/">Svenska</a> · <a href="/no/">Norsk</a></div>
+  <div>© 2025 KDEMOS — <a href="/">kdemos.com</a></div>
+</footer>
+</body>
+</html>

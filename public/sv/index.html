@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KDEMOS — Hitta bästa datumet för din grupp, gratis och utan registrering</title>
+  <meta name="description" content="Skapa en tillgänglighetsomröstning, dela länken i din grupp och hitta dagen som passar alla. Gratis Doodle-alternativ utan konto."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://kdemos.com/sv/"/>
+  <link rel="alternate" hreflang="es" href="https://kdemos.com/"/>
+  <link rel="alternate" hreflang="x-default" href="https://kdemos.com/"/>
+  <link rel="alternate" hreflang="en" href="https://kdemos.com/en/"/>
+  <link rel="alternate" hreflang="de" href="https://kdemos.com/de/"/>
+  <link rel="alternate" hreflang="fr" href="https://kdemos.com/fr/"/>
+  <link rel="alternate" hreflang="it" href="https://kdemos.com/it/"/>
+  <link rel="alternate" hreflang="pt" href="https://kdemos.com/pt/"/>
+  <link rel="alternate" hreflang="nl" href="https://kdemos.com/nl/"/>
+  <link rel="alternate" hreflang="ca" href="https://kdemos.com/ca/"/>
+  <link rel="alternate" hreflang="pl" href="https://kdemos.com/pl/"/>
+  <link rel="alternate" hreflang="da" href="https://kdemos.com/da/"/>
+  <link rel="alternate" hreflang="sv" href="https://kdemos.com/sv/"/>
+  <link rel="alternate" hreflang="no" href="https://kdemos.com/no/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://kdemos.com/sv/"/>
+  <meta property="og:title" content="KDEMOS — Hitta bästa datumet för din grupp, gratis och utan registrering"/>
+  <meta property="og:description" content="Skapa en tillgänglighetsomröstning, dela länken i din grupp och hitta dagen som passar alla. Gratis Doodle-alternativ utan konto."/>
+  <meta property="og:image" content="https://kdemos.com/images/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://kdemos.com/images/og.png"/>
+  <link rel="icon" type="image/png" href="/images/KDEMOS_logo.png"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "KDEMOS",
+    "url": "https://kdemos.com/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "sv",
+    "description": "Skapa en tillgänglighetsomröstning, dela länken i din grupp och hitta dagen som passar alla. Gratis Doodle-alternativ utan konto.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Är KDEMOS gratis? Behöver jag ett konto?", "acceptedAnswer": { "@type": "Answer", "text": "Det är 100 % gratis och utan registrering: skriv ditt namn och skapa eller gå med i en kalender." } },
+      { "@type": "Question", "name": "Är det ett Doodle-alternativ?", "acceptedAnswer": { "@type": "Answer", "text": "Ja — KDEMOS gör det viktigaste från Doodle: hittar dagen som passar alla, gratis och utan konto." } },
+      { "@type": "Question", "name": "Hur många kan delta?", "acceptedAnswer": { "@type": "Answer", "text": "Ingen gräns: samma länk funkar för 5 vänner eller en grupp på 100." } },
+      { "@type": "Question", "name": "Funkar det för teammöten?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut: dela länken via Slack, Teams eller e-post." } }
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.7; }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { background: #1a1a2e; border-bottom: 1px solid #1a73e8; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    header .logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    .hero { background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); padding: 60px 24px 48px; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; font-weight: 800; max-width: 760px; margin: 0 auto 16px; }
+    .hero p { font-size: 1.1rem; color: #aaa; max-width: 600px; margin: 0 auto 32px; }
+    .btn { display: inline-block; background: #1a73e8; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 1rem; font-weight: 600; margin: 4px; }
+    .btn:hover { background: #1558b0; text-decoration: none; }
+    .btn.ghost { background: transparent; border: 1px solid #1a73e8; color: #1a73e8; }
+    .container { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    h2 { font-size: 1.5rem; color: #fff; margin: 40px 0 18px; text-align: center; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 8px; }
+    .stat { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px; padding: 18px; text-align: center; }
+    .stat .n { display: block; font-size: 1.7rem; font-weight: 800; color: #1a73e8; }
+    .stat .l { display: block; font-weight: 700; color: #fff; margin-top: 2px; }
+    .stat .s { font-size: 0.82rem; color: #888; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .card { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px; padding: 20px; }
+    .card h3 { color: #1a73e8; font-size: 1rem; margin-bottom: 8px; }
+    .card p { color: #aaa; font-size: 0.92rem; margin: 0; }
+    .steps { counter-reset: step; list-style: none; padding: 0; max-width: 620px; margin: 0 auto; }
+    .steps li { counter-increment: step; display: flex; gap: 16px; margin-bottom: 18px; }
+    .steps li::before { content: counter(step); background: #1a73e8; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+    .steps h3 { color: #fff; font-size: 1rem; margin-bottom: 2px; }
+    .steps p { color: #aaa; font-size: 0.92rem; margin: 0; }
+    details { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    summary { color: #fff; font-weight: 600; cursor: pointer; }
+    details p { color: #aaa; margin-top: 8px; font-size: 0.93rem; }
+    .cta { background: linear-gradient(135deg, #0d1b2a, #1a1a2e); text-align: center; padding: 48px 24px; border-top: 1px solid #2a2a3e; }
+    .altnote { text-align: center; color: #667; font-size: 0.85rem; margin-top: 24px; }
+    footer { background: #0a0a14; text-align: center; padding: 24px; color: #555; font-size: 0.82rem; border-top: 1px solid #1a1a2e; line-height: 2; }
+    footer .on { color: #1a73e8; font-weight: 700; }
+    @media (max-width: 640px) {
+      .hero { padding: 36px 16px 28px; }
+      .container { padding: 32px 16px; }
+      .stats { grid-template-columns: 1fr; }
+      h2 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">KDEMOS</a>
+  <nav><a href="/?lang=sv">Skapa gratis kalender</a></nav>
+</header>
+
+<div class="hero">
+  <h1>Hitta bästa datumet för er träff</h1>
+  <p>Skapa en kalender, dela länken på WhatsApp och alla markerar sina dagar. Bästa dagen dyker upp av sig själv. Gratis, utan registrering.</p>
+  <a href="/?lang=sv" class="btn">Skapa gratis kalender →</a>
+  <a href="/?lang=sv" class="btn ghost">Gå med i kalender</a>
+</div>
+
+<div class="container">
+
+  <div class="stats">
+    <div class="stat"><span class="n">100%</span><span class="l">Gratis</span><span class="s">Inga betalplaner, ingen reklam</span></div>
+    <div class="stat"><span class="n">0</span><span class="l">Registreringar</span><span class="s">Skriv ditt namn och kör</span></div>
+    <div class="stat"><span class="n">∞</span><span class="l">Kalendrar</span><span class="s">Inga gränser, inget utgångsdatum</span></div>
+  </div>
+
+  <h2>Varför KDEMOS?</h2>
+  <div class="grid">
+    <div class="card"><h3>Klart på 30 sekunder</h3><p>Inget konto, ingen installation. Skriv ditt namn, välj dagar och dela länken.</p></div>
+    <div class="card"><h3>Byggt för gruppchattar</h3><p>Dela med ett klick via WhatsApp och Telegram. Funkar på alla mobiler.</p></div>
+    <div class="card"><h3>Resultat i realtid</h3><p>Alla ser tillgängligheten uppdateras direkt.</p></div>
+    <div class="card"><h3>Ett riktigt gratis Doodle-alternativ</h3><p>Ingen begränsad gratisplan, ingen reklam: obegränsade omröstningar, för alltid.</p></div>
+  </div>
+
+  <h2>Så funkar det</h2>
+  <ol class="steps">
+    <li><div><h3>Skapa kalendern</h3><p>Skriv ditt namn och välj möjliga dagar.</p></div></li>
+    <li><div><h3>Dela länken</h3><p>Klistra in den i din WhatsApp-, Telegram- eller Slack-grupp.</p></div></li>
+    <li><div><h3>Välj datumet</h3><p>Alla markerar sina dagar; bästa datumet visas i realtid.</p></div></li>
+  </ol>
+
+  <h2>Vanliga frågor</h2>
+  <details><summary>Är KDEMOS gratis? Behöver jag ett konto?</summary><p>Det är 100 % gratis och utan registrering: skriv ditt namn och skapa eller gå med i en kalender.</p></details>
+  <details><summary>Är det ett Doodle-alternativ?</summary><p>Ja — KDEMOS gör det viktigaste från Doodle: hittar dagen som passar alla, gratis och utan konto.</p></details>
+  <details><summary>Hur många kan delta?</summary><p>Ingen gräns: samma länk funkar för 5 vänner eller en grupp på 100.</p></details>
+  <details><summary>Funkar det för teammöten?</summary><p>Absolut: dela länken via Slack, Teams eller e-post.</p></details>
+
+  <p class="altnote">Gratis alternativ till Doodle, When2meet och Rallly.</p>
+
+</div>
+
+<div class="cta">
+  <h2 style="margin-top:0;">Redo att hitta ert datum?</h2>
+  <p style="color:#aaa;margin:10px 0 26px;">Gratis, utan registrering, på under en minut.</p>
+  <a href="/?lang=sv" class="btn">Skapa gratis kalender →</a>
+</div>
+
+<footer>
+  <div>Språk: <a href="/">Español</a> · <a href="/en/">English</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/it/">Italiano</a> · <a href="/pt/">Português</a> · <a href="/nl/">Nederlands</a> · <a href="/ca/">Català</a> · <a href="/pl/">Polski</a> · <a href="/da/">Dansk</a> · <a href="/sv/" class="on">Svenska</a> · <a href="/no/">Norsk</a></div>
+  <div>© 2025 KDEMOS — <a href="/">kdemos.com</a></div>
+</footer>
+</body>
+</html>

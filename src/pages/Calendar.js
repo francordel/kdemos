@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useThemeMode } from "../contexts/ThemeContext";
 import { Calendar as BigCalendar, dateFnsLocalizer } from "react-big-calendar";
-import { es, enUS } from "date-fns/locale";
 import { format, parse, startOfWeek, getDay } from "date-fns";
+import { DATE_LOCALES, formatDayLong } from "../i18n/locales";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { 
   Button, 
@@ -36,17 +36,25 @@ import {
   WhatsApp as WhatsAppIcon,
   Telegram as TelegramIcon,
   ContentCopy as CopyIcon,
-  RemoveCircleOutline as RemoveIcon
+  RemoveCircleOutline as RemoveIcon,
+  PushPin as PushPinIcon,
+  EventAvailable as EventAvailableIcon,
+  FileDownload as FileDownloadIcon,
+  Close as CloseSmallIcon,
+  NotificationsNone as NotificationsNoneIcon,
+  NotificationsActive as NotificationsActiveIcon
 } from "@mui/icons-material";
 import "./Calendar.css";
 
 // Importamos las funciones de utilidad
 import { dayPropGetter, TIME_SLOTS } from './CalendarUtils';
 import Recommendation from '../components/Recommendation';
-import { saveUserSelections, getUserFromCalendar, fetchCalendarSelections } from '../services';
+import { saveUserSelections, getUserFromCalendar, fetchCalendarSelections, fetchCalendarInfo, setCalendarFinalDate, getPublicConfig, subscribeNotifications } from '../services';
 import { findVoteTypeForDate, mergeUserSelections } from '../utils/selections';
+import { buildIcs, googleCalendarUrl, buildAvailabilityCsv, downloadFile } from '../utils/calendarExport';
+import { renderGoogleButton } from '../utils/googleAuth';
 
-const locales = { es, en: enUS };
+const locales = DATE_LOCALES;
 
 const localizer = dateFnsLocalizer({
   format,
@@ -77,7 +85,14 @@ function Calendar() {
   const [tempUserName, setTempUserName] = useState('');
   const [nameError, setNameError] = useState('');
   const [allUsers, setAllUsers] = useState([]);
+  const [finalDay, setFinalDay] = useState(null); // día definitivo elegido por el grupo
   const [showShareDialog, setShowShareDialog] = useState(false);
+  // Avisos por email (opcionales): solo si el backend tiene GOOGLE_CLIENT_ID
+  const [notifCfg, setNotifCfg] = useState(null);
+  const [showNotifyDialog, setShowNotifyDialog] = useState(false);
+  const [notifyEmail, setNotifyEmail] = useState(null);
+  const [notifyError, setNotifyError] = useState('');
+  const googleBtnRef = useRef(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -104,11 +119,12 @@ function Calendar() {
   useEffect(() => {
     const loadAllUsers = async () => {
       if (!calendarId) return;
-      
+
       try {
-        const users = await fetchCalendarSelections(calendarId);
-        setAllUsers(users);
-        
+        const info = await fetchCalendarInfo(calendarId);
+        setAllUsers(info.users);
+        setFinalDay(info.finalDate);
+
         // Users data loaded, calendar will re-render automatically
       } catch (error) {
         console.error('Error loading users:', error);
@@ -117,6 +133,54 @@ function Calendar() {
 
     loadAllUsers();
   }, [calendarId]);
+
+  // Config de notificaciones + estado local de suscripción
+  useEffect(() => {
+    getPublicConfig().then(setNotifCfg);
+    setNotifyEmail(localStorage.getItem(`kdemos-notify-${calendarId}`) || null);
+  }, [calendarId]);
+
+  // Renderiza el botón de Google cuando se abre el diálogo de avisos
+  useEffect(() => {
+    if (!showNotifyDialog || !notifCfg?.googleClientId || !googleBtnRef.current) return;
+    const enabling = !notifyEmail;
+    renderGoogleButton(notifCfg.googleClientId, googleBtnRef.current, async (credential) => {
+      setNotifyError('');
+      const res = await subscribeNotifications(calendarId, userName, credential, enabling);
+      if (res.ok) {
+        if (enabling) {
+          localStorage.setItem(`kdemos-notify-${calendarId}`, res.email);
+          setNotifyEmail(res.email);
+        } else {
+          localStorage.removeItem(`kdemos-notify-${calendarId}`);
+          setNotifyEmail(null);
+        }
+        setShowNotifyDialog(false);
+      } else {
+        setNotifyError(res.error || t('notifyFailed'));
+      }
+    }).catch(() => setNotifyError(t('notifyFailed')));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showNotifyDialog, notifCfg, notifyEmail]);
+
+  // Marca/desmarca el día definitivo (modelo de confianza: cualquiera del grupo)
+  const handleToggleFinalDay = async (dateStr) => {
+    const newVal = finalDay === dateStr ? null : dateStr;
+    setFinalDay(newVal);
+    await setCalendarFinalDate(calendarId, newVal);
+  };
+
+  // Exporta la disponibilidad de todos a CSV
+  const handleExportCsv = () => {
+    const labels = {
+      participant: t('participant'),
+      available: t('available'),
+      maybe: t('maybe'),
+      notAvailable: t('notAvailable'),
+    };
+    TIME_SLOTS.forEach((s) => { labels['slot_' + s] = t('slot_' + s); });
+    downloadFile(`kdemos-${calendarId}.csv`, buildAvailabilityCsv(allUsers, labels), 'text/csv;charset=utf-8');
+  };
 
   // Calendar will automatically re-render when selectedDays or allUsers change
 
@@ -428,6 +492,24 @@ function Calendar() {
             </Box>
 
             <Stack direction="row" spacing={1}>
+              {notifCfg?.notificationsEnabled && (
+                <IconButton
+                  onClick={() => { setNotifyError(''); setShowNotifyDialog(true); }}
+                  title={t('notifyTitle')}
+                  sx={{
+                    backgroundColor: notifyEmail ? "#E8F5E9" : "#F5F5F5",
+                    border: notifyEmail ? "1px solid #28A745" : "1px solid #E0E0E0",
+                    "&:hover": { backgroundColor: notifyEmail ? "#D0EBD8" : "#EEEEEE" },
+                    width: 44,
+                    height: 44,
+                  }}
+                >
+                  {notifyEmail
+                    ? <NotificationsActiveIcon sx={{ color: "#28A745" }} />
+                    : <NotificationsNoneIcon sx={{ color: "#8E8E93" }} />}
+                </IconButton>
+              )}
+
               <IconButton
                 onClick={() => setShowShareDialog(true)}
                 sx={{
@@ -500,6 +582,60 @@ function Calendar() {
           </Stack>
         </Paper>
 
+        {/* Final Day Banner */}
+        {finalDay && (
+          <Paper
+            elevation={0}
+            sx={{
+              p: 2,
+              mb: 2,
+              borderRadius: 2,
+              backgroundColor: "#E8F5E9",
+              border: "1px solid #28A745",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 1.5,
+              justifyContent: "center",
+            }}
+          >
+            <Typography sx={{ fontWeight: 700, color: "#1B5E20" }}>
+              🎉 {t('finalDayTitle')}: {formatDayLong(new Date(finalDay), language)}
+            </Typography>
+            <Button
+              size="small"
+              variant="outlined"
+              startIcon={<EventAvailableIcon />}
+              onClick={() =>
+                downloadFile(
+                  `kdemos-${calendarId}.ics`,
+                  buildIcs({ title: `KDEMOS: ${calendarId}`, dateStr: finalDay, url: window.location.origin + '/' + calendarId }),
+                  'text/calendar;charset=utf-8'
+                )
+              }
+              sx={{ textTransform: "none", borderColor: "#28A745", color: "#1B5E20" }}
+            >
+              {t('addToCalendar')}
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => window.open(googleCalendarUrl({ title: `KDEMOS: ${calendarId}`, dateStr: finalDay }), '_blank')}
+              sx={{ textTransform: "none", borderColor: "#28A745", color: "#1B5E20" }}
+            >
+              Google Calendar
+            </Button>
+            <IconButton
+              size="small"
+              onClick={() => handleToggleFinalDay(finalDay)}
+              title={t('unmarkFinalDay')}
+              sx={{ color: "#1B5E20" }}
+            >
+              <CloseSmallIcon fontSize="small" />
+            </IconButton>
+          </Paper>
+        )}
+
         {/* Calendar Section */}
         <Paper
           elevation={0}
@@ -520,7 +656,7 @@ function Calendar() {
             selectable={true}
             onSelectSlot={handleSelectSlot}
             views={["month"]}
-            culture={language === 'es' ? 'es' : 'en'}
+            culture={DATE_LOCALES[language] ? language : 'en'}
             style={{
               height: "100%",
               width: "100%",
@@ -889,16 +1025,12 @@ function Calendar() {
             pb: 1,
             borderBottom: "1px solid #F2F2F7"
           }}>
-            {popupDate ? format(
-              popupDate, 
-              language === 'es' ? "EEEE, dd 'de' MMMM" : "EEEE, MMMM dd", 
-              { locale: language === 'es' ? es : enUS }
-            ) : ""}
+            {popupDate ? formatDayLong(popupDate, language) : ""}
           </DialogTitle>
           
           <DialogContent sx={{ pt: 3, pb: 2 }}>
             <Typography variant="body2" color="#8E8E93" textAlign="center" sx={{ mb: 3 }}>
-              ¿Cuál es tu disponibilidad para este día?
+              {t('availabilityQuestion')}
             </Typography>
 
             {/* Show what others have voted for this day */}
@@ -1102,8 +1234,26 @@ function Calendar() {
               </Box>
             )}
           </DialogContent>
-          
+
           <DialogActions sx={{ p: 3, pt: 1 }}>
+            <Button
+              onClick={() => {
+                if (popupDate) handleToggleFinalDay(popupDate.toDateString());
+                handleDialogClose();
+              }}
+              startIcon={<PushPinIcon sx={{ fontSize: 16 }} />}
+              size="small"
+              sx={{
+                mr: 'auto',
+                color: popupDate && finalDay === popupDate.toDateString() ? "#28A745" : "#8E8E93",
+                fontWeight: 500,
+                textTransform: "none",
+                fontSize: '0.78rem',
+                "&:hover": { backgroundColor: "rgba(40,167,69,0.08)" }
+              }}
+            >
+              {popupDate && finalDay === popupDate.toDateString() ? t('unmarkFinalDay') : t('markFinalDay')}
+            </Button>
             <Button
               onClick={handleDialogClose}
               sx={{
@@ -1345,6 +1495,20 @@ function Calendar() {
                     <ShareIcon />
                   </IconButton>
                 )}
+
+                <IconButton
+                  onClick={handleExportCsv}
+                  title={t('exportCsv')}
+                  sx={{
+                    color: "#5856D6",
+                    backgroundColor: "rgba(88, 86, 214, 0.1)",
+                    "&:hover": { backgroundColor: "rgba(88, 86, 214, 0.2)" },
+                    width: 44,
+                    height: 44,
+                  }}
+                >
+                  <FileDownloadIcon />
+                </IconButton>
               </Stack>
             </Paper>
             
@@ -1373,6 +1537,52 @@ function Calendar() {
                   backgroundColor: "#0056CC",
                 },
               }}
+            >
+              {t('close')}
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Notifications Dialog */}
+        <Dialog
+          open={showNotifyDialog}
+          onClose={() => setShowNotifyDialog(false)}
+          maxWidth="xs"
+          fullWidth
+          PaperProps={{ sx: { borderRadius: 2, border: "1px solid #E5E5EA" } }}
+        >
+          <DialogTitle sx={{ textAlign: "center", fontWeight: 600 }}>
+            🔔 {t('notifyTitle')}
+          </DialogTitle>
+          <DialogContent sx={{ textAlign: "center" }}>
+            {notifyEmail ? (
+              <>
+                <Typography variant="body2" sx={{ mb: 1 }}>
+                  ✅ {t('notifyActiveFor')} <strong>{notifyEmail}</strong>
+                </Typography>
+                <Typography variant="body2" color="#8E8E93" sx={{ mb: 2 }}>
+                  {t('notifyDisableHint')}
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="body2" color="#8E8E93" sx={{ mb: 2 }}>
+                {t('notifyDesc')}
+              </Typography>
+            )}
+            <Box ref={googleBtnRef} sx={{ display: "flex", justifyContent: "center", my: 1 }} />
+            {notifyError && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {notifyError}
+              </Typography>
+            )}
+            <Typography variant="caption" color="#8E8E93" sx={{ display: "block", mt: 2 }}>
+              {t('notifyPrivacy')}
+            </Typography>
+          </DialogContent>
+          <DialogActions sx={{ p: 2, pt: 0, justifyContent: "center" }}>
+            <Button
+              onClick={() => setShowNotifyDialog(false)}
+              sx={{ color: "#8E8E93", textTransform: "none" }}
             >
               {t('close')}
             </Button>

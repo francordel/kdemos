@@ -71,7 +71,8 @@ export async function onRequest({ request, env }) {
       return new Response(JSON.stringify({
         ok: true,
         exists: true,
-        users: parsedUsers
+        users: parsedUsers,
+        finalDate: doc.fields?.finalDate?.stringValue || null
       }), {
         status: 200,
         headers: { "Content-Type": "application/json" }

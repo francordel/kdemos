@@ -425,7 +425,9 @@ function Home() {
 
           {/* Stats Band */}
           {(() => {
-            const c = CONTENT[language] || CONTENT.es;
+            // Contenido de marketing solo en es/en; el resto de idiomas ven la
+            // versión inglesa (sus landings /de/, /fr/... ya están traducidas).
+            const c = CONTENT[language] || (language === 'es' ? CONTENT.es : CONTENT.en);
             return (
               <>
                 <Stack
