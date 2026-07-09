@@ -1,4 +1,4 @@
-// Polaco — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Polaco, generado a partir del diccionario canónico es/en de LanguageContext.js
 const pl = {
   // Navigation
   home: 'Strona główna',

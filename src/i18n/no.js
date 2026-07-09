@@ -1,4 +1,4 @@
-// Noruego (bokmål) — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Noruego (bokmål), generado a partir del diccionario canónico es/en de LanguageContext.js
 const no = {
   // Navigation
   home: 'Hjem',

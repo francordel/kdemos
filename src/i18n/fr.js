@@ -1,4 +1,4 @@
-// Francés — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Francés, generado a partir del diccionario canónico es/en de LanguageContext.js
 const fr = {
   // Navigation
   home: 'Accueil',

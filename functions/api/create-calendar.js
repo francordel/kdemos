@@ -1,6 +1,9 @@
+import { isValidCalendarId, isValidUserId, badRequest } from '../_lib/validate.js';
 export async function onRequestPost({ request, env }) {
     try {
       const { calendarId } = await request.json();
+
+      if (!isValidCalendarId(calendarId)) return badRequest("calendarId inválido");
   
       if (!calendarId) {
         return new Response(JSON.stringify({ ok: false, error: "Falta el ID del calendario" }), {

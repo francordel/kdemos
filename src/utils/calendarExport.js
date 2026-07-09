@@ -56,7 +56,13 @@ export const buildAvailabilityCsv = (allUsers, labels) => {
   }
   const sortedDates = [...dates].sort((a, b) => new Date(a) - new Date(b));
 
-  const cell = (v) => `"${String(v).replace(/"/g, '""')}"`;
+  // Guard anti CSV-injection: si el valor empieza por = + - @ (fórmula en
+  // Excel/Sheets), se antepone un apóstrofo para neutralizarla.
+  const cell = (v) => {
+    let s = String(v);
+    if (/^[=+\-@]/.test(s)) s = "'" + s;
+    return `"${s.replace(/"/g, '""')}"`;
+  };
   const header = [labels.participant, ...sortedDates].map(cell).join(',');
 
   const rows = allUsers.map((user) => {

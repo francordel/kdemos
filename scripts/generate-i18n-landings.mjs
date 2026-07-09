@@ -12,7 +12,7 @@ const SITE = 'https://kdemos.com';
 const LANGS = {
   en: {
     name: 'English',
-    title: 'KDEMOS — Find the best date for your group, free and no sign-up',
+    title: 'KDEMOS: Find the best date for your group, free and no sign-up',
     desc: 'Create an availability poll, share the link in your group chat and find the day that works for everyone. Free Doodle alternative with no account needed.',
     h1: 'Find the best date for your group meetup',
     sub: 'Create a calendar, share the link on WhatsApp and everyone marks the days they can. The best day pops out on its own. Free, no sign-up.',
@@ -24,7 +24,7 @@ const LANGS = {
     howT: 'How it works',
     how: [['Create the calendar', 'Type your name and select the candidate days.'], ['Share the link', 'Paste it in your WhatsApp, Telegram or Slack group.'], ['Pick the winner', 'Each person marks their days; the best date shows in real time.']],
     faqT: 'Frequently asked questions',
-    faq: [['Is KDEMOS free? Do I need an account?', 'It is 100% free with no sign-up: just type your name and create or join a calendar.'], ['Is it a Doodle alternative?', 'Yes — KDEMOS does the essential part of Doodle, finding the day that works for everyone, free and without an account.'], ['How many people can join?', 'There is no limit: the same link works for 5 friends or a group of 100.'], ['Does it work for team meetings?', 'Sure: share the calendar link over Slack, Teams or email, just like with friends.']],
+    faq: [['Is KDEMOS free? Do I need an account?', 'It is 100% free with no sign-up: just type your name and create or join a calendar.'], ['Is it a Doodle alternative?', 'Yes, KDEMOS does the essential part of Doodle, finding the day that works for everyone, free and without an account.'], ['How many people can join?', 'There is no limit: the same link works for 5 friends or a group of 100.'], ['Does it work for team meetings?', 'Sure: share the calendar link over Slack, Teams or email, just like with friends.']],
     ctaEndT: 'Ready to find your date?',
     ctaEnd: 'Free, no sign-up, in under a minute.',
     alt: 'Free alternative to Doodle, When2meet and Rallly.',
@@ -32,7 +32,7 @@ const LANGS = {
   },
   de: {
     name: 'Deutsch',
-    title: 'KDEMOS — Finde den besten Termin für deine Gruppe, kostenlos & ohne Anmeldung',
+    title: 'KDEMOS: Finde den besten Termin für deine Gruppe, kostenlos & ohne Anmeldung',
     desc: 'Erstelle eine Terminumfrage, teile den Link in deiner Gruppe und finde den Tag, der allen passt. Kostenlose Doodle-Alternative ohne Konto.',
     h1: 'Finde den besten Termin für euer Treffen',
     sub: 'Kalender erstellen, Link per WhatsApp teilen, jeder markiert seine Tage. Der beste Termin ergibt sich von selbst. Kostenlos, ohne Anmeldung.',
@@ -44,7 +44,7 @@ const LANGS = {
     howT: 'So funktioniert es',
     how: [['Kalender erstellen', 'Namen eingeben und die möglichen Tage auswählen.'], ['Link teilen', 'In die WhatsApp-, Telegram- oder Slack-Gruppe einfügen.'], ['Termin festlegen', 'Jeder markiert seine Tage; der beste Termin erscheint in Echtzeit.']],
     faqT: 'Häufige Fragen',
-    faq: [['Ist KDEMOS kostenlos? Brauche ich ein Konto?', 'KDEMOS ist 100 % kostenlos und ohne Registrierung: einfach den Namen eingeben und einen Kalender erstellen oder beitreten.'], ['Ist es eine Doodle-Alternative?', 'Ja — KDEMOS erledigt das Wesentliche von Doodle: den Tag finden, der allen passt. Kostenlos und ohne Konto.'], ['Wie viele Personen können teilnehmen?', 'Es gibt kein Limit: derselbe Link funktioniert für 5 Freunde oder eine Gruppe von 100.'], ['Eignet es sich für Team-Meetings?', 'Klar: teile den Kalender-Link über Slack, Teams oder E-Mail.']],
+    faq: [['Ist KDEMOS kostenlos? Brauche ich ein Konto?', 'KDEMOS ist 100 % kostenlos und ohne Registrierung: einfach den Namen eingeben und einen Kalender erstellen oder beitreten.'], ['Ist es eine Doodle-Alternative?', 'Ja, KDEMOS erledigt das Wesentliche von Doodle: den Tag finden, der allen passt. Kostenlos und ohne Konto.'], ['Wie viele Personen können teilnehmen?', 'Es gibt kein Limit: derselbe Link funktioniert für 5 Freunde oder eine Gruppe von 100.'], ['Eignet es sich für Team-Meetings?', 'Klar: teile den Kalender-Link über Slack, Teams oder E-Mail.']],
     ctaEndT: 'Bereit, euren Termin zu finden?',
     ctaEnd: 'Kostenlos, ohne Anmeldung, in unter einer Minute.',
     alt: 'Kostenlose Alternative zu Doodle, When2meet und Rallly.',
@@ -52,7 +52,7 @@ const LANGS = {
   },
   fr: {
     name: 'Français',
-    title: 'KDEMOS — Trouvez la meilleure date pour votre groupe, gratuit et sans inscription',
+    title: 'KDEMOS: Trouvez la meilleure date pour votre groupe, gratuit et sans inscription',
     desc: 'Créez un sondage de disponibilités, partagez le lien dans votre groupe et trouvez le jour qui convient à tous. Alternative gratuite à Doodle, sans compte.',
     h1: 'Trouvez la meilleure date pour votre rencontre',
     sub: 'Créez un calendrier, partagez le lien sur WhatsApp et chacun coche ses jours. La meilleure date ressort toute seule. Gratuit, sans inscription.',
@@ -64,7 +64,7 @@ const LANGS = {
     howT: 'Comment ça marche',
     how: [['Créez le calendrier', 'Tapez votre prénom et sélectionnez les jours possibles.'], ['Partagez le lien', 'Collez-le dans votre groupe WhatsApp, Telegram ou Slack.'], ['Choisissez la date', 'Chacun coche ses jours ; la meilleure date apparaît en temps réel.']],
     faqT: 'Questions fréquentes',
-    faq: [['KDEMOS est-il gratuit ? Faut-il un compte ?', 'C’est 100 % gratuit et sans inscription : tapez votre prénom et créez ou rejoignez un calendrier.'], ['Est-ce une alternative à Doodle ?', 'Oui — KDEMOS fait l’essentiel de Doodle : trouver le jour qui convient à tous, gratuitement et sans compte.'], ['Combien de personnes peuvent participer ?', 'Aucune limite : le même lien fonctionne pour 5 amis ou un groupe de 100.'], ['Ça marche pour les réunions d’équipe ?', 'Bien sûr : partagez le lien via Slack, Teams ou e-mail.']],
+    faq: [['KDEMOS est-il gratuit ? Faut-il un compte ?', 'C’est 100 % gratuit et sans inscription : tapez votre prénom et créez ou rejoignez un calendrier.'], ['Est-ce une alternative à Doodle ?', 'Oui, KDEMOS fait l’essentiel de Doodle : trouver le jour qui convient à tous, gratuitement et sans compte.'], ['Combien de personnes peuvent participer ?', 'Aucune limite : le même lien fonctionne pour 5 amis ou un groupe de 100.'], ['Ça marche pour les réunions d’équipe ?', 'Bien sûr : partagez le lien via Slack, Teams ou e-mail.']],
     ctaEndT: 'Prêt à trouver votre date ?',
     ctaEnd: 'Gratuit, sans inscription, en moins d’une minute.',
     alt: 'Alternative gratuite à Doodle, When2meet et Rallly.',
@@ -72,7 +72,7 @@ const LANGS = {
   },
   it: {
     name: 'Italiano',
-    title: 'KDEMOS — Trova la data migliore per il tuo gruppo, gratis e senza registrazione',
+    title: 'KDEMOS: Trova la data migliore per il tuo gruppo, gratis e senza registrazione',
     desc: 'Crea un sondaggio di disponibilità, condividi il link nel gruppo e trova il giorno che va bene a tutti. Alternativa gratuita a Doodle, senza account.',
     h1: 'Trova la data migliore per il vostro incontro',
     sub: 'Crea un calendario, condividi il link su WhatsApp e ognuno segna i suoi giorni. La data migliore emerge da sola. Gratis, senza registrazione.',
@@ -84,7 +84,7 @@ const LANGS = {
     howT: 'Come funziona',
     how: [['Crea il calendario', 'Scrivi il tuo nome e seleziona i giorni possibili.'], ['Condividi il link', 'Incollalo nel gruppo WhatsApp, Telegram o Slack.'], ['Scegli la data', 'Ognuno segna i suoi giorni; la data migliore appare in tempo reale.']],
     faqT: 'Domande frequenti',
-    faq: [['KDEMOS è gratuito? Serve un account?', 'È gratuito al 100 % e senza registrazione: scrivi il tuo nome e crea o unisciti a un calendario.'], ['È un’alternativa a Doodle?', 'Sì — KDEMOS fa l’essenziale di Doodle: trovare il giorno che va bene a tutti, gratis e senza account.'], ['Quante persone possono partecipare?', 'Nessun limite: lo stesso link funziona per 5 amici o un gruppo di 100.'], ['Funziona per le riunioni di lavoro?', 'Certo: condividi il link via Slack, Teams o e-mail.']],
+    faq: [['KDEMOS è gratuito? Serve un account?', 'È gratuito al 100 % e senza registrazione: scrivi il tuo nome e crea o unisciti a un calendario.'], ['È un’alternativa a Doodle?', 'Sì, KDEMOS fa l’essenziale di Doodle: trovare il giorno che va bene a tutti, gratis e senza account.'], ['Quante persone possono partecipare?', 'Nessun limite: lo stesso link funziona per 5 amici o un gruppo di 100.'], ['Funziona per le riunioni di lavoro?', 'Certo: condividi il link via Slack, Teams o e-mail.']],
     ctaEndT: 'Pronto a trovare la vostra data?',
     ctaEnd: 'Gratis, senza registrazione, in meno di un minuto.',
     alt: 'Alternativa gratuita a Doodle, When2meet e Rallly.',
@@ -92,7 +92,7 @@ const LANGS = {
   },
   pt: {
     name: 'Português',
-    title: 'KDEMOS — Encontre a melhor data para o seu grupo, grátis e sem cadastro',
+    title: 'KDEMOS: Encontre a melhor data para o seu grupo, grátis e sem cadastro',
     desc: 'Crie uma enquete de disponibilidade, compartilhe o link no grupo e encontre o dia que funciona para todos. Alternativa gratuita ao Doodle, sem conta.',
     h1: 'Encontre a melhor data para o seu encontro',
     sub: 'Crie um calendário, compartilhe o link no WhatsApp e cada um marca os dias que pode. O melhor dia aparece sozinho. Grátis, sem cadastro.',
@@ -104,7 +104,7 @@ const LANGS = {
     howT: 'Como funciona',
     how: [['Crie o calendário', 'Digite seu nome e selecione os dias possíveis.'], ['Compartilhe o link', 'Cole no grupo do WhatsApp, Telegram ou Slack.'], ['Escolha a data', 'Cada um marca seus dias; a melhor data aparece em tempo real.']],
     faqT: 'Perguntas frequentes',
-    faq: [['O KDEMOS é grátis? Preciso de conta?', 'É 100 % gratuito e sem cadastro: digite seu nome e crie ou entre em um calendário.'], ['É uma alternativa ao Doodle?', 'Sim — o KDEMOS faz o essencial do Doodle: encontrar o dia que serve para todos, grátis e sem conta.'], ['Quantas pessoas podem participar?', 'Sem limite: o mesmo link funciona para 5 amigos ou um grupo de 100.'], ['Funciona para reuniões de trabalho?', 'Claro: compartilhe o link pelo Slack, Teams ou e-mail.']],
+    faq: [['O KDEMOS é grátis? Preciso de conta?', 'É 100 % gratuito e sem cadastro: digite seu nome e crie ou entre em um calendário.'], ['É uma alternativa ao Doodle?', 'Sim, o KDEMOS faz o essencial do Doodle: encontrar o dia que serve para todos, grátis e sem conta.'], ['Quantas pessoas podem participar?', 'Sem limite: o mesmo link funciona para 5 amigos ou um grupo de 100.'], ['Funciona para reuniões de trabalho?', 'Claro: compartilhe o link pelo Slack, Teams ou e-mail.']],
     ctaEndT: 'Pronto para encontrar a data?',
     ctaEnd: 'Grátis, sem cadastro, em menos de um minuto.',
     alt: 'Alternativa gratuita ao Doodle, When2meet e Rallly.',
@@ -112,7 +112,7 @@ const LANGS = {
   },
   nl: {
     name: 'Nederlands',
-    title: 'KDEMOS — Vind de beste datum voor je groep, gratis en zonder registratie',
+    title: 'KDEMOS: Vind de beste datum voor je groep, gratis en zonder registratie',
     desc: 'Maak een beschikbaarheidspoll, deel de link in je groep en vind de dag die iedereen past. Gratis Doodle-alternatief zonder account.',
     h1: 'Vind de beste datum voor jullie afspraak',
     sub: 'Maak een kalender, deel de link via WhatsApp en iedereen markeert zijn dagen. De beste datum komt vanzelf bovendrijven. Gratis, zonder registratie.',
@@ -124,7 +124,7 @@ const LANGS = {
     howT: 'Zo werkt het',
     how: [['Maak de kalender', 'Typ je naam en selecteer de mogelijke dagen.'], ['Deel de link', 'Plak hem in je WhatsApp-, Telegram- of Slack-groep.'], ['Kies de datum', 'Iedereen markeert zijn dagen; de beste datum verschijnt in realtime.']],
     faqT: 'Veelgestelde vragen',
-    faq: [['Is KDEMOS gratis? Heb ik een account nodig?', 'Het is 100 % gratis en zonder registratie: typ je naam en maak of join een kalender.'], ['Is het een Doodle-alternatief?', 'Ja — KDEMOS doet de kern van Doodle: de dag vinden die iedereen past, gratis en zonder account.'], ['Hoeveel mensen kunnen meedoen?', 'Geen limiet: dezelfde link werkt voor 5 vrienden of een groep van 100.'], ['Werkt het voor teamvergaderingen?', 'Zeker: deel de link via Slack, Teams of e-mail.']],
+    faq: [['Is KDEMOS gratis? Heb ik een account nodig?', 'Het is 100 % gratis en zonder registratie: typ je naam en maak of join een kalender.'], ['Is het een Doodle-alternatief?', 'Ja, KDEMOS doet de kern van Doodle: de dag vinden die iedereen past, gratis en zonder account.'], ['Hoeveel mensen kunnen meedoen?', 'Geen limiet: dezelfde link werkt voor 5 vrienden of een groep van 100.'], ['Werkt het voor teamvergaderingen?', 'Zeker: deel de link via Slack, Teams of e-mail.']],
     ctaEndT: 'Klaar om jullie datum te vinden?',
     ctaEnd: 'Gratis, zonder registratie, in minder dan een minuut.',
     alt: 'Gratis alternatief voor Doodle, When2meet en Rallly.',
@@ -132,7 +132,7 @@ const LANGS = {
   },
   ca: {
     name: 'Català',
-    title: 'KDEMOS — Troba el millor dia per quedar amb el teu grup, gratis i sense registre',
+    title: 'KDEMOS: Troba el millor dia per quedar amb el teu grup, gratis i sense registre',
     desc: 'Crea una enquesta de disponibilitat, comparteix l’enllaç al grup i troba el dia que va bé a tothom. Alternativa gratuïta a Doodle, sense compte.',
     h1: 'Troba el millor dia per a la vostra quedada',
     sub: 'Crea un calendari, comparteix l’enllaç per WhatsApp i cadascú marca els seus dies. El millor dia surt sol. Gratis, sense registre.',
@@ -144,7 +144,7 @@ const LANGS = {
     howT: 'Com funciona',
     how: [['Crea el calendari', 'Escriu el teu nom i selecciona els dies possibles.'], ['Comparteix l’enllaç', 'Enganxa’l al grup de WhatsApp, Telegram o Slack.'], ['Tria el dia', 'Cadascú marca els seus dies; el millor dia apareix en temps real.']],
     faqT: 'Preguntes freqüents',
-    faq: [['KDEMOS és gratuït? Necessito un compte?', 'És 100 % gratuït i sense registre: escriu el teu nom i crea o uneix-te a un calendari.'], ['És una alternativa a Doodle?', 'Sí — KDEMOS fa l’essencial de Doodle: trobar el dia que va bé a tothom, gratis i sense compte.'], ['Quanta gent pot participar?', 'Sense límit: el mateix enllaç serveix per a 5 amics o un grup de 100.'], ['Serveix per a reunions de feina?', 'És clar: comparteix l’enllaç per Slack, Teams o correu.']],
+    faq: [['KDEMOS és gratuït? Necessito un compte?', 'És 100 % gratuït i sense registre: escriu el teu nom i crea o uneix-te a un calendari.'], ['És una alternativa a Doodle?', 'Sí, KDEMOS fa l’essencial de Doodle: trobar el dia que va bé a tothom, gratis i sense compte.'], ['Quanta gent pot participar?', 'Sense límit: el mateix enllaç serveix per a 5 amics o un grup de 100.'], ['Serveix per a reunions de feina?', 'És clar: comparteix l’enllaç per Slack, Teams o correu.']],
     ctaEndT: 'A punt per trobar el vostre dia?',
     ctaEnd: 'Gratis, sense registre, en menys d’un minut.',
     alt: 'Alternativa gratuïta a Doodle, When2meet i Rallly.',
@@ -152,7 +152,7 @@ const LANGS = {
   },
   pl: {
     name: 'Polski',
-    title: 'KDEMOS — Znajdź najlepszy termin dla swojej grupy, za darmo i bez rejestracji',
+    title: 'KDEMOS: Znajdź najlepszy termin dla swojej grupy, za darmo i bez rejestracji',
     desc: 'Stwórz ankietę dostępności, udostępnij link w grupie i znajdź dzień pasujący wszystkim. Darmowa alternatywa dla Doodle, bez konta.',
     h1: 'Znajdź najlepszy termin na wasze spotkanie',
     sub: 'Stwórz kalendarz, udostępnij link na WhatsAppie, a każdy zaznaczy swoje dni. Najlepszy termin wyłoni się sam. Za darmo, bez rejestracji.',
@@ -164,7 +164,7 @@ const LANGS = {
     howT: 'Jak to działa',
     how: [['Stwórz kalendarz', 'Wpisz swoje imię i wybierz możliwe dni.'], ['Udostępnij link', 'Wklej go do grupy na WhatsAppie, Telegramie lub Slacku.'], ['Wybierz termin', 'Każdy zaznacza swoje dni; najlepszy termin pojawia się w czasie rzeczywistym.']],
     faqT: 'Najczęstsze pytania',
-    faq: [['Czy KDEMOS jest darmowy? Czy potrzebuję konta?', 'Jest w 100 % darmowy i bez rejestracji: wpisz imię i stwórz kalendarz lub dołącz do istniejącego.'], ['Czy to alternatywa dla Doodle?', 'Tak — KDEMOS robi to, co najważniejsze w Doodle: znajduje dzień pasujący wszystkim, za darmo i bez konta.'], ['Ile osób może wziąć udział?', 'Bez limitu: ten sam link działa dla 5 znajomych i grupy 100 osób.'], ['Czy nadaje się do spotkań zespołu?', 'Jasne: udostępnij link przez Slack, Teams lub e-mail.']],
+    faq: [['Czy KDEMOS jest darmowy? Czy potrzebuję konta?', 'Jest w 100 % darmowy i bez rejestracji: wpisz imię i stwórz kalendarz lub dołącz do istniejącego.'], ['Czy to alternatywa dla Doodle?', 'Tak, KDEMOS robi to, co najważniejsze w Doodle: znajduje dzień pasujący wszystkim, za darmo i bez konta.'], ['Ile osób może wziąć udział?', 'Bez limitu: ten sam link działa dla 5 znajomych i grupy 100 osób.'], ['Czy nadaje się do spotkań zespołu?', 'Jasne: udostępnij link przez Slack, Teams lub e-mail.']],
     ctaEndT: 'Gotowi znaleźć termin?',
     ctaEnd: 'Za darmo, bez rejestracji, w mniej niż minutę.',
     alt: 'Darmowa alternatywa dla Doodle, When2meet i Rallly.',
@@ -172,7 +172,7 @@ const LANGS = {
   },
   da: {
     name: 'Dansk',
-    title: 'KDEMOS — Find den bedste dato for din gruppe, gratis og uden tilmelding',
+    title: 'KDEMOS: Find den bedste dato for din gruppe, gratis og uden tilmelding',
     desc: 'Opret en afstemning om ledige dage, del linket i din gruppe og find den dag, der passer alle. Gratis Doodle-alternativ uden konto.',
     h1: 'Find den bedste dato til jeres aftale',
     sub: 'Opret en kalender, del linket på WhatsApp, og alle markerer deres dage. Den bedste dato viser sig selv. Gratis, uden tilmelding.',
@@ -184,7 +184,7 @@ const LANGS = {
     howT: 'Sådan virker det',
     how: [['Opret kalenderen', 'Skriv dit navn og vælg de mulige dage.'], ['Del linket', 'Indsæt det i din WhatsApp-, Telegram- eller Slack-gruppe.'], ['Vælg datoen', 'Alle markerer deres dage; den bedste dato vises i realtid.']],
     faqT: 'Ofte stillede spørgsmål',
-    faq: [['Er KDEMOS gratis? Skal jeg have en konto?', 'Det er 100 % gratis og uden tilmelding: skriv dit navn og opret eller deltag i en kalender.'], ['Er det et Doodle-alternativ?', 'Ja — KDEMOS gør det vigtigste fra Doodle: finder den dag, der passer alle, gratis og uden konto.'], ['Hvor mange kan deltage?', 'Ingen grænse: det samme link virker for 5 venner eller en gruppe på 100.'], ['Virker det til teammøder?', 'Selvfølgelig: del linket via Slack, Teams eller e-mail.']],
+    faq: [['Er KDEMOS gratis? Skal jeg have en konto?', 'Det er 100 % gratis og uden tilmelding: skriv dit navn og opret eller deltag i en kalender.'], ['Er det et Doodle-alternativ?', 'Ja, KDEMOS gør det vigtigste fra Doodle: finder den dag, der passer alle, gratis og uden konto.'], ['Hvor mange kan deltage?', 'Ingen grænse: det samme link virker for 5 venner eller en gruppe på 100.'], ['Virker det til teammøder?', 'Selvfølgelig: del linket via Slack, Teams eller e-mail.']],
     ctaEndT: 'Klar til at finde jeres dato?',
     ctaEnd: 'Gratis, uden tilmelding, på under et minut.',
     alt: 'Gratis alternativ til Doodle, When2meet og Rallly.',
@@ -192,7 +192,7 @@ const LANGS = {
   },
   sv: {
     name: 'Svenska',
-    title: 'KDEMOS — Hitta bästa datumet för din grupp, gratis och utan registrering',
+    title: 'KDEMOS: Hitta bästa datumet för din grupp, gratis och utan registrering',
     desc: 'Skapa en tillgänglighetsomröstning, dela länken i din grupp och hitta dagen som passar alla. Gratis Doodle-alternativ utan konto.',
     h1: 'Hitta bästa datumet för er träff',
     sub: 'Skapa en kalender, dela länken på WhatsApp och alla markerar sina dagar. Bästa dagen dyker upp av sig själv. Gratis, utan registrering.',
@@ -204,7 +204,7 @@ const LANGS = {
     howT: 'Så funkar det',
     how: [['Skapa kalendern', 'Skriv ditt namn och välj möjliga dagar.'], ['Dela länken', 'Klistra in den i din WhatsApp-, Telegram- eller Slack-grupp.'], ['Välj datumet', 'Alla markerar sina dagar; bästa datumet visas i realtid.']],
     faqT: 'Vanliga frågor',
-    faq: [['Är KDEMOS gratis? Behöver jag ett konto?', 'Det är 100 % gratis och utan registrering: skriv ditt namn och skapa eller gå med i en kalender.'], ['Är det ett Doodle-alternativ?', 'Ja — KDEMOS gör det viktigaste från Doodle: hittar dagen som passar alla, gratis och utan konto.'], ['Hur många kan delta?', 'Ingen gräns: samma länk funkar för 5 vänner eller en grupp på 100.'], ['Funkar det för teammöten?', 'Absolut: dela länken via Slack, Teams eller e-post.']],
+    faq: [['Är KDEMOS gratis? Behöver jag ett konto?', 'Det är 100 % gratis och utan registrering: skriv ditt namn och skapa eller gå med i en kalender.'], ['Är det ett Doodle-alternativ?', 'Ja, KDEMOS gör det viktigaste från Doodle: hittar dagen som passar alla, gratis och utan konto.'], ['Hur många kan delta?', 'Ingen gräns: samma länk funkar för 5 vänner eller en grupp på 100.'], ['Funkar det för teammöten?', 'Absolut: dela länken via Slack, Teams eller e-post.']],
     ctaEndT: 'Redo att hitta ert datum?',
     ctaEnd: 'Gratis, utan registrering, på under en minut.',
     alt: 'Gratis alternativ till Doodle, When2meet och Rallly.',
@@ -212,7 +212,7 @@ const LANGS = {
   },
   no: {
     name: 'Norsk',
-    title: 'KDEMOS — Finn den beste datoen for gruppen din, gratis og uten registrering',
+    title: 'KDEMOS: Finn den beste datoen for gruppen din, gratis og uten registrering',
     desc: 'Lag en tilgjengelighetsavstemning, del lenken i gruppen og finn dagen som passer alle. Gratis Doodle-alternativ uten konto.',
     h1: 'Finn den beste datoen for treffet deres',
     sub: 'Lag en kalender, del lenken på WhatsApp, og alle markerer dagene sine. Den beste datoen dukker opp av seg selv. Gratis, uten registrering.',
@@ -224,7 +224,7 @@ const LANGS = {
     howT: 'Slik fungerer det',
     how: [['Lag kalenderen', 'Skriv navnet ditt og velg mulige dager.'], ['Del lenken', 'Lim den inn i WhatsApp-, Telegram- eller Slack-gruppen.'], ['Velg datoen', 'Alle markerer dagene sine; den beste datoen vises i sanntid.']],
     faqT: 'Ofte stilte spørsmål',
-    faq: [['Er KDEMOS gratis? Trenger jeg konto?', 'Det er 100 % gratis og uten registrering: skriv navnet ditt og lag eller bli med i en kalender.'], ['Er det et Doodle-alternativ?', 'Ja — KDEMOS gjør det viktigste fra Doodle: finner dagen som passer alle, gratis og uten konto.'], ['Hvor mange kan delta?', 'Ingen grense: samme lenke funker for 5 venner eller en gruppe på 100.'], ['Funker det for teammøter?', 'Klart: del lenken via Slack, Teams eller e-post.']],
+    faq: [['Er KDEMOS gratis? Trenger jeg konto?', 'Det er 100 % gratis og uten registrering: skriv navnet ditt og lag eller bli med i en kalender.'], ['Er det et Doodle-alternativ?', 'Ja, KDEMOS gjør det viktigste fra Doodle: finner dagen som passer alle, gratis og uten konto.'], ['Hvor mange kan delta?', 'Ingen grense: samme lenke funker for 5 venner eller en gruppe på 100.'], ['Funker det for teammøter?', 'Klart: del lenken via Slack, Teams eller e-post.']],
     ctaEndT: 'Klar til å finne datoen deres?',
     ctaEnd: 'Gratis, uten registrering, på under ett minutt.',
     alt: 'Gratis alternativ til Doodle, When2meet og Rallly.',
@@ -376,7 +376,7 @@ ${t.faq.map(([q, a]) => `  <details><summary>${q}</summary><p>${a}</p></details>
 
 <footer>
   <div>${t.langLabel}: ${switcher(code)}</div>
-  <div>© 2025 KDEMOS — <a href="/">kdemos.com</a></div>
+  <div>© 2025 KDEMOS, <a href="/">kdemos.com</a></div>
 </footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# Tendencias Google Trends — nicho KDemos (encuestas de disponibilidad)
+# Tendencias Google Trends, nicho KDemos (encuestas de disponibilidad)
 
 **Fecha del análisis:** 8 de julio de 2026
 **Fuente:** Google Trends, búsqueda web, últimos 12 meses (España + mundial)
@@ -21,7 +21,7 @@ Serie de "when2meet" en España (12 meses): **plano a 0 durante todo el año** y
 - **Temas asociados en ascenso:** Sondeo de opinión, Reunión, Huso horario.
 - **Consultas asociadas en ascenso:** "doodle" y **"rallly"** (aumento puntual).
 
-**Implicación:** la página `/alternativa-when2meet/` de KDemos (creada hoy) llega en el momento exacto. Hay que reforzarla y pedir indexación urgente — la ola está viva ahora mismo.
+**Implicación:** la página `/alternativa-when2meet/` de KDemos (creada hoy) llega en el momento exacto. Hay que reforzarla y pedir indexación urgente, la ola está viva ahora mismo.
 
 ---
 
@@ -55,7 +55,7 @@ Media anual **54** (escala relativa), sostenida los 12 meses y con tendencia al 
 
 ### "when2meet alternative" (global)
 
-Casi 0 todo el año y aparece (2-5) justo en las últimas 3 semanas — coherente con el momento viral de when2meet. Volumen pequeño pero naciente.
+Casi 0 todo el año y aparece (2-5) justo en las últimas 3 semanas, coherente con el momento viral de when2meet. Volumen pequeño pero naciente.
 
 ---
 
@@ -80,8 +80,8 @@ Las queries reales por las que Google ya nos muestra:
 **Google ya nos asocia al cluster "encuesta doodle" pero en posiciones 27-49** porque no hay ninguna página que lo ataque directamente. Con una página dedicada se puede saltar a página 1-2.
 
 Otras señales de GSC:
-- `/en/doodle-alternative/` ya suma 27 impresiones a posición 13,3 (a horas de publicarse) — señal muy buena.
-- CTR móvil 21,2 % vs escritorio 1,4 % — el mensaje conecta con quien busca desde el móvil.
+- `/en/doodle-alternative/` ya suma 27 impresiones a posición 13,3 (a horas de publicarse), señal muy buena.
+- CTR móvil 21,2 % vs escritorio 1,4 %, el mensaje conecta con quien busca desde el móvil.
 - La home rankea a posición 4 de media con 11,6 % de CTR.
 
 ---
@@ -100,6 +100,6 @@ Otras señales de GSC:
 ### Calendario del nicho
 
 - **Ahora (julio):** surfear la ola de when2meet; publicar todo lo demás para que indexe en verano.
-- **Septiembre:** el nicho entero despierta (+300 % vs verano) — vuelta al trabajo/clase = organizar reuniones y quedadas.
+- **Septiembre:** el nicho entero despierta (+300 % vs verano), vuelta al trabajo/clase = organizar reuniones y quedadas.
 - **Oct-nov y feb-jun:** mesetas altas sostenidas.
-- **Mercado DACH (futuro):** Suiza/Alemania/Austria son el epicentro de "doodle alternative" — una versión alemana de la página sería el siguiente salto.
+- **Mercado DACH (futuro):** Suiza/Alemania/Austria son el epicentro de "doodle alternative", una versión alemana de la página sería el siguiente salto.

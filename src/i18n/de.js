@@ -1,4 +1,4 @@
-// Alemán — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Alemán, generado a partir del diccionario canónico es/en de LanguageContext.js
 const de = {
   // Navigation
   home: 'Startseite',

@@ -1,4 +1,4 @@
-// Italiano — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Italiano, generado a partir del diccionario canónico es/en de LanguageContext.js
 const it = {
   // Navigation
   home: 'Home',

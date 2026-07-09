@@ -1,4 +1,4 @@
-// Portugués — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Portugués, generado a partir del diccionario canónico es/en de LanguageContext.js
 const pt = {
   // Navigation
   home: 'Início',

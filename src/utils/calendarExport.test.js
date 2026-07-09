@@ -75,6 +75,14 @@ describe('buildAvailabilityCsv', () => {
     expect(luis).toContain('"No disponible"');
   });
 
+  it('neutraliza formulas de Excel (CSV injection)', () => {
+    const csv = buildAvailabilityCsv(
+      [{ userId: '=HYPERLINK("http://evil")', selectedDays: { green: [], orange: [], red: [] } }],
+      LABELS
+    );
+    expect(csv.split('\n')[1].startsWith('"\'=HYPERLINK')).toBe(true);
+  });
+
   it('escapa comillas dobles en nombres', () => {
     const csv = buildAvailabilityCsv(
       [{ userId: 'El "Rubio"', selectedDays: { green: [], orange: [], red: [] } }],

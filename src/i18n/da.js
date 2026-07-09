@@ -1,4 +1,4 @@
-// Danés — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Danés, generado a partir del diccionario canónico es/en de LanguageContext.js
 const da = {
   // Navigation
   home: 'Forside',

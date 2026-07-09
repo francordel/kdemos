@@ -1,4 +1,4 @@
-// Neerlandés — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Neerlandés, generado a partir del diccionario canónico es/en de LanguageContext.js
 const nl = {
   // Navigation
   home: 'Home',

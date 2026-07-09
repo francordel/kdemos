@@ -1,3 +1,4 @@
+import { isValidCalendarId, isValidUserId, badRequest } from '../_lib/validate.js';
 // Activa/desactiva los avisos por email de un participante.
 // El email NUNCA lo envía el cliente: se obtiene del idToken de Google
 // verificado contra el endpoint oficial de tokeninfo (firma + audience).
@@ -10,6 +11,9 @@ export async function onRequestPost({ request, env }) {
 
   try {
     const { calendarId, userId, idToken, notify } = await request.json();
+
+      if (!isValidCalendarId(calendarId)) return badRequest("calendarId inválido");
+      if (!isValidUserId(userId)) return badRequest("userId inválido");
 
     if (!calendarId || !userId || !idToken) {
       return json({ ok: false, error: "Datos incompletos" }, 400);

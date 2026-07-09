@@ -1,3 +1,4 @@
+import { isValidCalendarId, isValidUserId, badRequest } from '../_lib/validate.js';
 export async function onRequest({ request, env }) {
     try {
       const method = request.method;
@@ -11,7 +12,9 @@ export async function onRequest({ request, env }) {
         const body = await request.json();
         calendarId = body.calendarId;
       }
-  
+
+      if (!isValidCalendarId(calendarId)) return badRequest("calendarId inválido");
+
       if (!calendarId) {
         return new Response(JSON.stringify([]), {
           status: 400,

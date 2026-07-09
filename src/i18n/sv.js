@@ -1,4 +1,4 @@
-// Sueco — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Sueco, generado a partir del diccionario canónico es/en de LanguageContext.js
 const sv = {
   // Navigation
   home: 'Hem',

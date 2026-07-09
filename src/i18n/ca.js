@@ -1,4 +1,4 @@
-// Catalán — generado a partir del diccionario canónico es/en de LanguageContext.js
+// Catalán, generado a partir del diccionario canónico es/en de LanguageContext.js
 const ca = {
   // Navigation
   home: 'Inici',

@@ -28,7 +28,7 @@
 - 100% free, no registration, no installation (works in any mobile browser).
 - Interface in Spanish and English.
 - Each calendar has its own shareable URL.
-- Real-time availability view — everyone sees updates instantly.
+- Real-time availability view, everyone sees updates instantly.
 - No account needed for participants or organizers.
 - Optional per-day time slots: each person can also mark which parts of the
   day they can (morning, mid-morning, lunch time, afternoon, evening or late

@@ -1,3 +1,4 @@
+import { isValidCalendarId, isValidUserId, badRequest } from '../_lib/validate.js';
 // Serializa el objeto selectedDays (green/red/orange + timeSlots opcional)
 // al formato tipado de Firestore para un usuario.
 // extraFields: campos previos a conservar (email/notify de las suscripciones).
@@ -41,13 +42,18 @@ function serializeUser(userId, selectedDays, extraFields = {}) {
 async function notifySubscribers(env, calendarId, voterId, users) {
   if (!env.RESEND_API_KEY) return;
 
-  const recipients = users
-    .map((u) => u.mapValue.fields)
-    .filter((f) => f.notify?.booleanValue && f.email?.stringValue && f.userId.stringValue !== voterId)
-    .map((f) => f.email.stringValue);
+  // Dedupe + tope de destinatarios (anti-abuso en repo público) y saneo del
+  // nombre del votante antes de meterlo en el asunto del email.
+  const recipients = [...new Set(
+    users
+      .map((u) => u.mapValue.fields)
+      .filter((f) => f.notify?.booleanValue && f.email?.stringValue && f.userId.stringValue !== voterId)
+      .map((f) => f.email.stringValue)
+  )].slice(0, 20);
 
   if (recipients.length === 0) return;
 
+  const safeVoter = String(voterId).replace(/[\r\n\t<>]/g, ' ').slice(0, 40);
   const link = `https://kdemos.com/${calendarId}`;
   try {
     await fetch("https://api.resend.com/emails", {
@@ -59,8 +65,8 @@ async function notifySubscribers(env, calendarId, voterId, users) {
       body: JSON.stringify({
         from: env.NOTIFY_FROM || "KDEMOS <avisos@kdemos.com>",
         to: recipients,
-        subject: `${voterId} ha votado en tu calendario KDEMOS`,
-        text: `${voterId} acaba de marcar su disponibilidad en el calendario "${calendarId}".\n\nMira cómo va la votación: ${link}\n\n—\nRecibes este aviso porque activaste las notificaciones en ese calendario. Para dejar de recibirlas, entra en el calendario y desactívalas.`,
+        subject: `${safeVoter} ha votado en tu calendario KDEMOS`,
+        text: `${safeVoter} acaba de marcar su disponibilidad en el calendario "${calendarId}".\n\nMira cómo va la votación: ${link}\n\nRecibes este aviso porque activaste las notificaciones en ese calendario. Para dejar de recibirlas, entra en el calendario y desactívalas.`,
       }),
     });
   } catch (err) {
@@ -71,6 +77,9 @@ async function notifySubscribers(env, calendarId, voterId, users) {
 export async function onRequestPost({ request, env }) {
     try {
       const { calendarId, userId, selectedDays } = await request.json();
+
+      if (!isValidCalendarId(calendarId)) return badRequest("calendarId inválido");
+      if (!isValidUserId(userId)) return badRequest("userId inválido");
   
       if (!calendarId || !userId || !selectedDays) {
         return new Response(JSON.stringify({ ok: false, error: "Datos incompletos" }), {

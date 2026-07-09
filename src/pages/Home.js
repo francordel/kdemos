@@ -86,7 +86,7 @@ const CONTENT = {
     faq: [
       { q: '¿Cómo organizo una quedada por WhatsApp?', a: 'Crea un calendario en KDEMOS, comparte el enlace en el grupo de WhatsApp y cada persona marca los días que le vienen bien. El mejor día para quedar sale solo.' },
       { q: '¿KDEMOS es gratis? ¿Necesito registrarme?', a: 'Es gratis y sin registro: solo escribes tu nombre y ya puedes crear o unirte a un calendario. No hay plan de pago ni límites.' },
-      { q: '¿Es una alternativa a Doodle en español?', a: 'Sí. KDEMOS hace lo esencial de Doodle —encontrar el día que mejor le viene a todos— gratis, en español y sin crear cuenta. Sin anuncios ni restricciones.' },
+      { q: '¿Es una alternativa a Doodle en español?', a: 'Sí. KDEMOS hace lo esencial de Doodle, encontrar el día que mejor le viene a todos, gratis, en español y sin crear cuenta. Sin anuncios ni restricciones.' },
       { q: '¿Sirve para reuniones de trabajo?', a: 'Claro: comparte el enlace del calendario por Slack, Teams o correo, igual que harías con tus amigos por WhatsApp.' },
       { q: '¿Cuántas personas pueden participar en un calendario?', a: 'No hay límite. Puedes compartir el enlace con 5 amigos o con un grupo de 100 personas de una asociación.' },
       { q: '¿Puedo indicar también la hora, no solo el día?', a: 'Sí. De forma opcional, al marcar un día como disponible puedes elegir en qué franjas puedes quedar: por la mañana, a media mañana, a la hora de la comida, por la tarde, por la noche o de madrugada. La recomendación te dirá el mejor día y también la mejor franja horaria.' },
@@ -131,7 +131,7 @@ const CONTENT = {
     faq: [
       { q: 'How do I plan a meetup over WhatsApp?', a: 'Create a calendar on KDEMOS, share the link in your WhatsApp group and everyone marks the days that work for them. The best day pops out on its own.' },
       { q: 'Is KDEMOS free? Do I need an account?', a: 'It is free and requires no sign-up: just type your name and create or join a calendar. No paid plan, no limits.' },
-      { q: 'Is it a Doodle alternative?', a: 'Yes. KDEMOS does the essential part of Doodle — finding the day that works for everyone — for free and without an account. No ads, no restrictions.' },
+      { q: 'Is it a Doodle alternative?', a: 'Yes. KDEMOS does the essential part of Doodle, finding the day that works for everyone, for free and without an account. No ads, no restrictions.' },
       { q: 'Does it work for team meetings?', a: 'Sure: share the calendar link over Slack, Teams or email, just like you would with friends over WhatsApp.' },
       { q: 'How many people can join a calendar?', a: 'There is no limit. Share the link with 5 friends or a group of 100 people from an association.' },
       { q: 'Can I set the time of day, not just the day?', a: 'Yes. Optionally, when you mark a day as available you can choose which time slots work for you: morning, mid-morning, lunch time, afternoon, evening or late night. The recommendation shows the best day and the best time slot too.' },

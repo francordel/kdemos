@@ -1,9 +1,16 @@
+import { isValidCalendarId, isValidUserId, badRequest } from '../_lib/validate.js';
 // Marca (o desmarca) el día definitivo de un calendario.
 // Cualquiera con el enlace puede hacerlo: KDemos no tiene cuentas y el
 // modelo de confianza es el mismo que para votar.
 export async function onRequestPost({ request, env }) {
   try {
     const { calendarId, finalDate } = await request.json();
+
+      if (!isValidCalendarId(calendarId)) return badRequest("calendarId inválido");
+      // finalDate: '' (desmarcar) o un dateStr corto sin caracteres de control
+      if (finalDate && (typeof finalDate !== 'string' || finalDate.length > 40 || /[\x00-\x1f<>]/.test(finalDate))) {
+        return badRequest("finalDate inválido");
+      }
 
     if (!calendarId) {
       return new Response(JSON.stringify({ ok: false, error: "Falta el ID del calendario" }), {
