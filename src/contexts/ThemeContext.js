@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createTheme } from '@mui/material/styles';
+import { safeGet, safeSet } from '../utils/storage';
 
 const ThemeContext = createContext();
 
@@ -16,7 +17,7 @@ export const CustomThemeProvider = ({ children }) => {
 
   useEffect(() => {
     // Check localStorage first
-    const savedMode = localStorage.getItem('calendar-theme-mode');
+    const savedMode = safeGet('calendar-theme-mode');
     if (savedMode && (savedMode === 'light' || savedMode === 'dark')) {
       setMode(savedMode);
     } else {
@@ -28,7 +29,7 @@ export const CustomThemeProvider = ({ children }) => {
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
-      if (!localStorage.getItem('calendar-theme-mode')) {
+      if (!safeGet('calendar-theme-mode')) {
         setMode(e.matches ? 'dark' : 'light');
       }
     };
@@ -40,7 +41,7 @@ export const CustomThemeProvider = ({ children }) => {
   const toggleMode = () => {
     const newMode = mode === 'light' ? 'dark' : 'light';
     setMode(newMode);
-    localStorage.setItem('calendar-theme-mode', newMode);
+    safeSet('calendar-theme-mode', newMode);
   };
 
   const theme = createTheme({

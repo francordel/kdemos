@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { safeGet, safeSet } from '../utils/storage';
 import de from '../i18n/de';
 import fr from '../i18n/fr';
 import it from '../i18n/it';
@@ -317,11 +318,11 @@ export const LanguageProvider = ({ children }) => {
     const urlLang = new URLSearchParams(window.location.search).get('lang');
     if (urlLang && translations[urlLang]) {
       setLanguage(urlLang);
-      localStorage.setItem('calendar-language', urlLang);
+      safeSet('calendar-language', urlLang);
       return;
     }
 
-    const savedLanguage = localStorage.getItem('calendar-language');
+    const savedLanguage = safeGet('calendar-language');
     if (savedLanguage && translations[savedLanguage]) {
       setLanguage(savedLanguage);
     } else {
@@ -336,7 +337,7 @@ export const LanguageProvider = ({ children }) => {
   const changeLanguage = (newLanguage) => {
     if (translations[newLanguage]) {
       setLanguage(newLanguage);
-      localStorage.setItem('calendar-language', newLanguage);
+      safeSet('calendar-language', newLanguage);
     }
   };
 
