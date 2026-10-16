@@ -1,5 +1,5 @@
 // Locales de date-fns y nombres nativos de los idiomas soportados por la app.
-import { es, enUS, de, fr, it, pt, nl, ca, pl, da, sv, nb } from 'date-fns/locale';
+import { es, enUS, de, fr, it, pt, nl, ca, pl, da, sv, nb, tr } from 'date-fns/locale';
 import { format } from 'date-fns';
 
 export const DATE_LOCALES = {
@@ -15,6 +15,7 @@ export const DATE_LOCALES = {
   da,
   sv,
   no: nb, // noruego bokmål
+  tr,
 };
 
 export const LANGUAGE_NAMES = {
@@ -30,6 +31,7 @@ export const LANGUAGE_NAMES = {
   da: 'Dansk',
   sv: 'Svenska',
   no: 'Norsk',
+  tr: 'Türkçe',
 };
 
 // Fecha larga sin año ("jueves, 16 de julio"), con el patrón natural por idioma
@@ -40,6 +42,8 @@ export const formatDayLong = (date, language) => {
       ? "EEEE, dd 'de' MMMM"
       : language === 'en'
         ? 'EEEE, MMMM dd'
-        : 'EEEE, d MMMM';
+        : language === 'tr'
+          ? 'd MMMM EEEE'
+          : 'EEEE, d MMMM';
   return format(date, pattern, { locale });
 };

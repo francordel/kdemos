@@ -10,6 +10,7 @@ import pl from '../i18n/pl';
 import da from '../i18n/da';
 import sv from '../i18n/sv';
 import no from '../i18n/no';
+import tr from '../i18n/tr';
 
 const LanguageContext = createContext();
 
@@ -307,7 +308,8 @@ const translations = {
   pl,
   da,
   sv,
-  no
+  no,
+  tr
 };
 
 export const LanguageProvider = ({ children }) => {
@@ -333,6 +335,11 @@ export const LanguageProvider = ({ children }) => {
       }
     }
   }, []);
+
+  // <html lang> sigue al idioma activo: text-transform: uppercase usa sus reglas (tr: i → İ)
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   const changeLanguage = (newLanguage) => {
     if (translations[newLanguage]) {
