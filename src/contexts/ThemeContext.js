@@ -59,6 +59,10 @@ export const CustomThemeProvider = ({ children }) => {
         secondary: mode === 'light' ? '#8E8E93' : '#BEBEBE',
       },
       divider: mode === 'light' ? '#E5E5EA' : '#333333',
+      action: {
+        disabled: mode === 'light' ? '#6E6E73' : '#BEBEBE',
+        disabledBackground: mode === 'light' ? '#E5E5EA' : '#3A3A3C',
+      },
     },
     typography: {
       fontFamily: "'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
@@ -97,6 +101,16 @@ export const CustomThemeProvider = ({ children }) => {
             backgroundColor: mode === 'light' ? '#FFFFFF' : '#1E1E1E',
             color: mode === 'light' ? '#1C1C1E' : '#FFFFFF',
             transition: 'background-color 0.3s ease, color 0.3s ease',
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          contained: {
+            '&.Mui-disabled': {
+              backgroundColor: mode === 'light' ? '#E5E5EA' : '#3A3A3C',
+              color: mode === 'light' ? '#6E6E73' : '#BEBEBE',
+            },
           },
         },
       },

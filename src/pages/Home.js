@@ -617,8 +617,9 @@ function Home() {
               "&:hover": {
                 backgroundColor: "#0056CC",
               },
-              "&:disabled": {
-                backgroundColor: "#C7C7CC",
+              "&.Mui-disabled": {
+                backgroundColor: "action.disabledBackground",
+                color: "action.disabled",
               },
             }}
           >
@@ -738,8 +739,9 @@ function Home() {
               "&:hover": {
                 backgroundColor: "#0056CC",
               },
-              "&:disabled": {
-                backgroundColor: "#C7C7CC",
+              "&.Mui-disabled": {
+                backgroundColor: "action.disabledBackground",
+                color: "action.disabled",
               },
             }}
           >
