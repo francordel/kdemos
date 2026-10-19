@@ -79,6 +79,7 @@ function Calendar() {
   const [dialogVoteType, setDialogVoteType] = useState(null); // voto elegido dentro del diálogo abierto
   const [dialogSlots, setDialogSlots] = useState([]); // franjas elegidas dentro del diálogo abierto
   const [showRecommendation, setShowRecommendation] = useState(false);
+  const [showShareAfterRecommendation, setShowShareAfterRecommendation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showNameDialog, setShowNameDialog] = useState(false);
@@ -309,14 +310,19 @@ function Calendar() {
       setAllUsers(users);
       
       setShowRecommendation(true);
-      // Show share dialog after completing voting
-      setTimeout(() => {
-        setShowShareDialog(true);
-      }, 2000);
+      setShowShareAfterRecommendation(true);
     } catch (error) {
       console.error("Error al guardar las selecciones:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleCloseRecommendation = () => {
+    setShowRecommendation(false);
+    if (showShareAfterRecommendation) {
+      setShowShareAfterRecommendation(false);
+      setShowShareDialog(true);
     }
   };
 
@@ -1595,7 +1601,7 @@ function Calendar() {
             calendarId={calendarId}
             currentUserName={userName}
             currentUserSelections={{ ...selectedDays, timeSlots }}
-            onClose={() => setShowRecommendation(false)}
+            onClose={handleCloseRecommendation}
           />
         )}
         
