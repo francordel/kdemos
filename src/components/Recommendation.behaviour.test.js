@@ -55,4 +55,17 @@ describe('Recommendation (BDD)', () => {
     // Then
     expect(await screen.findByText('No hay fechas disponibles')).toBeInTheDocument();
   });
+
+  it('muestra el subtítulo traducido y no la clave sin traducir', async () => {
+    mockFetch.mockResolvedValue([]);
+
+    renderRec({
+      currentUserName: 'Ana',
+      currentUserSelections: { green: [], red: [], orange: [] }
+    });
+
+    expect(screen.getByText('Basado en las disponibilidades del equipo')).toBeInTheDocument();
+    expect(screen.queryByText('basedOnAvailability')).not.toBeInTheDocument();
+    await screen.findByText('No hay fechas disponibles');
+  });
 });

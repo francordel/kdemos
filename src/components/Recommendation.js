@@ -135,7 +135,7 @@ const Recommendation = ({ calendarId, currentUserName, currentUserSelections, on
                                 color="#8E8E93"
                                 sx={{ fontSize: { xs: "0.75rem", sm: "0.875rem" } }}
                             >
-                                {t('basedOnAvailability')}
+                                {t('recommendedDatesDesc')}
                             </Typography>
                         </Box>
                     </Stack>
