@@ -51,7 +51,13 @@ El proyecto puede funcionar con tres modos de almacenamiento de datos: `mock`, `
 
 Para el desarrollo local, se recomienda usar el modo `mock`, que no requiere credenciales.
 
-Configura el archivo `.env` con el modo deseado:
+Copia la plantilla de variables de entorno:
+
+```bash
+cp .env.example .env
+```
+
+Por defecto, `.env.example` viene configurado con `REACT_APP_DB_MODE=mock`. Si deseas cambiar el modo, edita el archivo `.env`:
 
 ```env
 REACT_APP_DB_MODE=mock
