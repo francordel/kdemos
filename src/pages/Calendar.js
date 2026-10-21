@@ -501,6 +501,7 @@ function Calendar() {
               {notifCfg?.notificationsEnabled && (
                 <IconButton
                   onClick={() => { setNotifyError(''); setShowNotifyDialog(true); }}
+                  aria-label={notifyEmail ? t('manageNotifications') : t('enableNotifications')}
                   title={t('notifyTitle')}
                   sx={{
                     backgroundColor: notifyEmail ? "#E8F5E9" : "#F5F5F5",
@@ -518,6 +519,7 @@ function Calendar() {
 
               <IconButton
                 onClick={() => setShowShareDialog(true)}
+                aria-label={t('shareCalendar')}
                 sx={{
                   backgroundColor: "#F0F9FF",
                   border: "1px solid #007AFF",
@@ -534,6 +536,7 @@ function Calendar() {
 
               <IconButton
                 onClick={handleBack}
+                aria-label={t('backToHome')}
                 sx={{
                   backgroundColor: "#F5F5F5",
                   border: "1px solid #E0E0E0",
@@ -634,6 +637,7 @@ function Calendar() {
             <IconButton
               size="small"
               onClick={() => handleToggleFinalDay(finalDay)}
+              aria-label={t('unmarkFinalDay')}
               title={t('unmarkFinalDay')}
               sx={{ color: "#1B5E20" }}
             >
@@ -846,6 +850,7 @@ function Calendar() {
                         e.stopPropagation();
                         props.onNavigate("PREV");
                       }}
+                      aria-label={t('previousMonth')}
                       onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -903,6 +908,7 @@ function Calendar() {
                         e.stopPropagation();
                         props.onNavigate("NEXT");
                       }}
+                      aria-label={t('nextMonth')}
                       onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -1448,6 +1454,7 @@ function Calendar() {
               <Stack direction="row" spacing={1} justifyContent="center">
                 <IconButton
                   onClick={copyToClipboard}
+                  aria-label={copySuccess ? t('linkCopied') : t('copyCalendarLink')}
                   sx={{
                     color: copySuccess ? "#28A745" : "#007AFF",
                     backgroundColor: copySuccess ? "rgba(40, 167, 69, 0.1)" : "rgba(0, 122, 255, 0.1)",
@@ -1463,6 +1470,7 @@ function Calendar() {
                 
                 <IconButton
                   onClick={shareWhatsApp}
+                  aria-label={t('shareOnWhatsApp')}
                   sx={{
                     color: "#25D366",
                     backgroundColor: "rgba(37, 211, 102, 0.1)",
@@ -1476,6 +1484,7 @@ function Calendar() {
                 
                 <IconButton
                   onClick={shareTelegram}
+                  aria-label={t('shareOnTelegram')}
                   sx={{
                     color: "#0088CC",
                     backgroundColor: "rgba(0, 136, 204, 0.1)",
@@ -1490,6 +1499,7 @@ function Calendar() {
                 {navigator.share && (
                   <IconButton
                     onClick={shareNative}
+                    aria-label={t('shareUsingDevice')}
                     sx={{
                       color: "#8E8E93",
                       backgroundColor: "rgba(142, 142, 147, 0.1)",
@@ -1504,6 +1514,7 @@ function Calendar() {
 
                 <IconButton
                   onClick={handleExportCsv}
+                  aria-label={t('exportCsv')}
                   title={t('exportCsv')}
                   sx={{
                     color: "#5856D6",

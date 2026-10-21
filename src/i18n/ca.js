@@ -134,7 +134,18 @@ const ca = {
   notifyActiveFor: 'Avisos activats per a',
   notifyDisableHint: 'Per desactivar-los, confirma la teva identitat amb Google:',
   notifyPrivacy: 'Només fem servir el teu correu per a aquests avisos. Pots desactivar-los quan vulguis.',
-  notifyFailed: 'No s\'ha pogut actualitzar la subscripció'
+  notifyFailed: 'No s\'ha pogut actualitzar la subscripció',
+  switchToLightMode: 'Switch to light mode',
+  switchToDarkMode: 'Switch to dark mode',
+  copyCalendarLink: 'Copy calendar link',
+  linkCopied: 'Calendar link copied',
+  shareOnWhatsApp: 'Share on WhatsApp',
+  shareOnTelegram: 'Share on Telegram',
+  shareUsingDevice: 'Share using device options',
+  enableNotifications: 'Enable email notifications',
+  manageNotifications: 'Manage email notifications',
+  previousMonth: 'Previous month',
+  nextMonth: 'Next month'
 };
 
 export default ca;

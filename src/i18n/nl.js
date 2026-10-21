@@ -134,7 +134,18 @@ const nl = {
   notifyActiveFor: 'Meldingen ingeschakeld voor',
   notifyDisableHint: 'Bevestig je identiteit met Google om ze uit te schakelen:',
   notifyPrivacy: 'We gebruiken je e-mail alleen voor deze meldingen. Je kunt ze altijd uitschakelen.',
-  notifyFailed: 'Kon het abonnement niet bijwerken'
+  notifyFailed: 'Kon het abonnement niet bijwerken',
+  switchToLightMode: 'Switch to light mode',
+  switchToDarkMode: 'Switch to dark mode',
+  copyCalendarLink: 'Copy calendar link',
+  linkCopied: 'Calendar link copied',
+  shareOnWhatsApp: 'Share on WhatsApp',
+  shareOnTelegram: 'Share on Telegram',
+  shareUsingDevice: 'Share using device options',
+  enableNotifications: 'Enable email notifications',
+  manageNotifications: 'Manage email notifications',
+  previousMonth: 'Previous month',
+  nextMonth: 'Next month'
 };
 
 export default nl;
