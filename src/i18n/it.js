@@ -134,7 +134,18 @@ const it = {
   notifyActiveFor: 'Notifiche attive per',
   notifyDisableHint: 'Per disattivarle, conferma la tua identità con Google:',
   notifyPrivacy: 'Usiamo la tua email solo per queste notifiche. Puoi disattivarle quando vuoi.',
-  notifyFailed: 'Impossibile aggiornare l\'iscrizione'
+  notifyFailed: 'Impossibile aggiornare l\'iscrizione',
+  switchToLightMode: 'Switch to light mode',
+  switchToDarkMode: 'Switch to dark mode',
+  copyCalendarLink: 'Copy calendar link',
+  linkCopied: 'Calendar link copied',
+  shareOnWhatsApp: 'Share on WhatsApp',
+  shareOnTelegram: 'Share on Telegram',
+  shareUsingDevice: 'Share using device options',
+  enableNotifications: 'Enable email notifications',
+  manageNotifications: 'Manage email notifications',
+  previousMonth: 'Previous month',
+  nextMonth: 'Next month'
 };
 
 export default it;

@@ -134,7 +134,18 @@ const da = {
   notifyActiveFor: 'Notifikationer slået til for',
   notifyDisableHint: 'Bekræft din identitet med Google for at slå dem fra:',
   notifyPrivacy: 'Vi bruger kun din e-mail til disse notifikationer. Du kan slå dem fra når som helst.',
-  notifyFailed: 'Kunne ikke opdatere abonnementet'
+  notifyFailed: 'Kunne ikke opdatere abonnementet',
+  switchToLightMode: 'Switch to light mode',
+  switchToDarkMode: 'Switch to dark mode',
+  copyCalendarLink: 'Copy calendar link',
+  linkCopied: 'Calendar link copied',
+  shareOnWhatsApp: 'Share on WhatsApp',
+  shareOnTelegram: 'Share on Telegram',
+  shareUsingDevice: 'Share using device options',
+  enableNotifications: 'Enable email notifications',
+  manageNotifications: 'Manage email notifications',
+  previousMonth: 'Previous month',
+  nextMonth: 'Next month'
 };
 
 export default da;

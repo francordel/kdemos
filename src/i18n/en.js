@@ -133,7 +133,18 @@ const en = {
     notifyActiveFor: 'Notifications enabled for',
     notifyDisableHint: 'To turn them off, confirm your identity with Google:',
     notifyPrivacy: 'We only use your email for these notifications. You can turn them off anytime.',
-    notifyFailed: 'Could not update the subscription'
+    notifyFailed: 'Could not update the subscription',
+    switchToLightMode: 'Switch to light mode',
+    switchToDarkMode: 'Switch to dark mode',
+    copyCalendarLink: 'Copy calendar link',
+    linkCopied: 'Calendar link copied',
+    shareOnWhatsApp: 'Share on WhatsApp',
+    shareOnTelegram: 'Share on Telegram',
+    shareUsingDevice: 'Share using device options',
+    enableNotifications: 'Enable email notifications',
+    manageNotifications: 'Manage email notifications',
+    previousMonth: 'Previous month',
+    nextMonth: 'Next month'
   };
 
 export default en;
