@@ -89,6 +89,7 @@ function Header() {
             <Button
               startIcon={<HomeIcon />}
               onClick={() => navigate('/')}
+              aria-label={t('home')}
               sx={{
                 color: isHomePage ? '#007AFF' : '#8E8E93',
                 fontWeight: 500,
@@ -152,6 +153,7 @@ function Header() {
             {/* Theme Toggle */}
             <IconButton
               onClick={toggleMode}
+              aria-label={isDark ? t('switchToLightMode') : t('switchToDarkMode')}
               sx={{
                 color: 'text.secondary',
                 '&:hover': {
@@ -212,6 +214,7 @@ function Header() {
             <Stack direction="row" spacing={0.5}>
               <IconButton
                 href="https://www.linkedin.com/in/francisco-jose-cortes-delgado/"
+                aria-label="LinkedIn profile"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ 
@@ -229,6 +232,7 @@ function Header() {
 
               <IconButton
                 href="https://github.com/francordel"
+                aria-label="GitHub profile"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ 
@@ -295,6 +299,7 @@ function Header() {
             {/* Mobile Theme Toggle */}
             <IconButton
               onClick={toggleMode}
+              aria-label={isDark ? t('switchToLightMode') : t('switchToDarkMode')}
               sx={{
                 color: 'text.secondary',
                 '&:hover': {

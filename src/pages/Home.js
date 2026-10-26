@@ -549,6 +549,7 @@ function Home() {
             </Typography>
             <IconButton 
               onClick={() => handleDialogClose(setShowCreateDialog)}
+              aria-label={t('close')}
               size="small"
             >
               <CloseIcon />
@@ -648,6 +649,7 @@ function Home() {
             </Typography>
             <IconButton 
               onClick={() => handleDialogClose(setShowLoginDialog)}
+              aria-label={t('close')}
               size="small"
             >
               <CloseIcon />
@@ -807,6 +809,7 @@ function Home() {
             <Stack direction="row" spacing={1} justifyContent="center">
               <IconButton
                 onClick={copyToClipboard}
+                aria-label={copySuccess ? t('linkCopied') : t('copyCalendarLink')}
                 sx={{
                   color: copySuccess ? "#28A745" : "#007AFF",
                   backgroundColor: copySuccess ? "rgba(40, 167, 69, 0.1)" : "rgba(0, 122, 255, 0.1)",
@@ -822,6 +825,7 @@ function Home() {
               
               <IconButton
                 onClick={shareWhatsApp}
+                aria-label={t('shareOnWhatsApp')}
                 sx={{
                   color: "#25D366",
                   backgroundColor: "rgba(37, 211, 102, 0.1)",
@@ -835,6 +839,7 @@ function Home() {
               
               <IconButton
                 onClick={shareTelegram}
+                aria-label={t('shareOnTelegram')}
                 sx={{
                   color: "#0088CC",
                   backgroundColor: "rgba(0, 136, 204, 0.1)",
@@ -849,6 +854,7 @@ function Home() {
               {navigator.share && (
                 <IconButton
                   onClick={shareNative}
+                  aria-label={t('shareUsingDevice')}
                   sx={{
                     color: "#8E8E93",
                     backgroundColor: "rgba(142, 142, 147, 0.1)",

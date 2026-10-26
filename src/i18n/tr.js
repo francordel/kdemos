@@ -134,7 +134,18 @@ const tr = {
   notifyActiveFor: 'Bildirimler şu adres için açık:',
   notifyDisableHint: 'Kapatmak için Google ile kimliğini doğrula:',
   notifyPrivacy: 'E-postanı yalnızca bu bildirimler için kullanırız. İstediğin zaman kapatabilirsin.',
-  notifyFailed: 'Abonelik güncellenemedi'
+  notifyFailed: 'Abonelik güncellenemedi',
+  switchToLightMode: 'Switch to light mode',
+  switchToDarkMode: 'Switch to dark mode',
+  copyCalendarLink: 'Copy calendar link',
+  linkCopied: 'Calendar link copied',
+  shareOnWhatsApp: 'Share on WhatsApp',
+  shareOnTelegram: 'Share on Telegram',
+  shareUsingDevice: 'Share using device options',
+  enableNotifications: 'Enable email notifications',
+  manageNotifications: 'Manage email notifications',
+  previousMonth: 'Previous month',
+  nextMonth: 'Next month'
 };
 
 export default tr;
