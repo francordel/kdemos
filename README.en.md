@@ -50,7 +50,13 @@ The project can operate with three data storage modes: `mock`, `firebase`, or `c
 
 For local development, `mock` mode is recommended: it needs no credentials.
 
-Configure the `.env` file with the desired mode:
+Copy the environment variables template:
+
+```bash
+cp .env.example .env
+```
+
+By default, `.env.example` is configured with `REACT_APP_DB_MODE=mock`. If you wish to change the mode, edit the `.env` file:
 
 ```env
 REACT_APP_DB_MODE=mock
