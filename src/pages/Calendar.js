@@ -126,6 +126,24 @@ function Calendar() {
         setAllUsers(info.users);
         setFinalDay(info.finalDate);
 
+        const currentUser = info.users.find(
+          (user) =>
+            user.userId &&
+            userName &&
+            user.userId.trim() === userName.trim(),
+        );
+        if (currentUser?.selectedDays) {
+          const {
+            green = [],
+            red = [],
+            orange = [],
+            timeSlots: savedTimeSlots = {},
+          } = currentUser.selectedDays;
+
+          setSelectedDays({ green, red, orange });
+          setTimeSlots(savedTimeSlots);
+        }
+
         // Users data loaded, calendar will re-render automatically
       } catch (error) {
         console.error('Error loading users:', error);
